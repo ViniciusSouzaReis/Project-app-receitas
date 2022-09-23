@@ -1,8 +1,9 @@
 import React from 'react';
+import Header from '../components/Header';
 
-function Login() {
+function Login(props) {
   return (
-    <div>Login</div>
+    <div><Header props={ props } /></div>
   );
 }
 
