@@ -1,8 +1,7 @@
 import React, { useContext, useState } from 'react';
 import UserContext from '../Api-Context/contexts/UserContext';
-import Header from '../components/Header';
 
-function Login(props) {
+function Login() {
   const { email, setEmail } = useContext(UserContext);
   const [newEmail, setNewEmail] = useState({
     email: '',
@@ -46,7 +45,6 @@ function Login(props) {
 
   return (
     <div>
-      <Header props={ props } />
       <form
         onSubmit={ formSubmit }
         style={ { backgroundColor: '#598C58', color: 'greenyellow' } }
