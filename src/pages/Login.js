@@ -1,7 +1,10 @@
 import React, { useContext, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import UserContext from '../Api-Context/contexts/UserContext';
+import { saveProductCard } from '../services/userLocalStorage';
 
 function Login() {
+  const history = useHistory();
   const { email, setEmail } = useContext(UserContext);
   const [newEmail, setNewEmail] = useState({
     email: '',
@@ -32,6 +35,10 @@ function Login() {
   const formSubmit = (event) => {
     event.preventDefault();
     setEmail((prev) => ({ ...prev, email: newEmail.email }));
+    saveProductCard('user', newEmail);
+    saveProductCard('mealsToken', 1);
+    saveProductCard('drinksToken', 1);
+    history.push('/meals');
   };
 
   const handleChange = ({ target: { name, value } }) => {

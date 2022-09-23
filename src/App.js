@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import UserProvider from './Api-Context/providers/UserProvider';
 import Login from './pages/Login';
+import Recipes from './pages/Recipes';
 
 function App() {
   return (
@@ -11,7 +12,7 @@ function App() {
       <UserProvider>
         <Switch>
           <Route exact path="/" component={ Login } />
-          <Route exact path="/meals" component={ Login } />
+          <Route exact path="/meals" component={ Recipes } />
           <Route exact path="/drinks" component={ Login } />
           <Route exact path="/meals/:id" component={ Login } />
           <Route exact path="/drinks/:id" component={ Login } />
