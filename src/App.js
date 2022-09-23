@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 // import './App.css';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import UserProvider from './Api-Context/providers/UserProvider';
-import SearchBar from './components/SearchBar';
 import Login from './pages/Login';
 import Recipes from './pages/Recipes';
 
