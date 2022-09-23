@@ -3,8 +3,13 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 // import './App.css';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import UserProvider from './Api-Context/providers/UserProvider';
-import SearchBar from './components/SearchBar';
+import DoneRecipes from './pages/DoneRecipes';
+import FavoriteRecipes from './pages/FavoriteRecipes';
 import Login from './pages/Login';
+import Profile from './pages/Profile';
+import RecipeInProgress from './pages/RecipeInProgress';
+import Recipes from './pages/Recipes';
+import RecipesDetails from './pages/RecipesDetails';
 
 function App() {
   return (
@@ -12,19 +17,18 @@ function App() {
       <UserProvider>
         <Switch>
           <Route exact path="/" component={ Login } />
-          <Route exact path="/meals" component={ Login } />
-          <Route exact path="/drinks" component={ Login } />
-          <Route exact path="/meals/:id" component={ Login } />
-          <Route exact path="/drinks/:id" component={ Login } />
-          <Route exact path="/meals/:id/in-progress" component={ Login } />
-          <Route exact path="/drinks/:id/in-progress" component={ Login } />
-          <Route exact path="/profile" component={ Login } />
-          <Route exact path="/done-recipes" component={ Login } />
-          <Route exact path="/favorite-recipes" component={ Login } />
+          <Route exact path="/meals" component={ Recipes } />
+          <Route exact path="/drinks" component={ Recipes } />
+          <Route exact path="/meals/:id" component={ RecipesDetails } />
+          <Route exact path="/drinks/:id" component={ RecipesDetails } />
+          <Route exact path="/meals/:id/in-progress" component={ RecipeInProgress } />
+          <Route exact path="/drinks/:id/in-progress" component={ RecipeInProgress } />
+          <Route exact path="/profile" component={ Profile } />
+          <Route exact path="/done-recipes" component={ DoneRecipes } />
+          <Route exact path="/favorite-recipes" component={ FavoriteRecipes } />
         </Switch>
       </UserProvider>
     </BrowserRouter>
->>>>>>>>> Temporary merge branch 2
   );
 }
 

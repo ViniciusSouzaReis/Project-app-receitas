@@ -2,20 +2,40 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import perfilIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
+import SearchBar from './SearchBar';
 
 function Header({ props: { history: { push, location: { pathname } } } }) {
   const [filter, setFilter] = useState(false);
 
   const title = () => {
     switch (pathname) {
-    case '/':
-      return (<h2>Login</h2>);
+    case '/meals':
+      return (<h2 data-testid="page-title">Meals</h2>);
+    case '/drinks':
+      return (<h2 data-testid="page-title">Drinks</h2>);
     case '/profile':
-      return (<h2 data-testid="page-title">Perfil</h2>);
+      return (<h2 data-testid="page-title">Profile</h2>);
+    case '/done-recipes':
+      return (<h2 data-testid="page-title">Done Recipes</h2>);
+    case '/favorite-recipes':
+      return (<h2 data-testid="page-title">Favorite Recipes</h2>);
     default:
       break;
     }
   };
+
+  const containSearchButton = () => {
+    switch (pathname) {
+      case '/profile':
+        return false;
+      case '/done-recipes':
+        return false;
+      case '/favorite-recipes':
+        return false;
+      default:
+        return true;
+    }
+  }
 
   return (
     <div>
@@ -26,7 +46,7 @@ function Header({ props: { history: { push, location: { pathname } } } }) {
       >
         <img src={ perfilIcon } data-testid="profile-top-btn" alt="profile" />
       </button>
-      <button
+      {containSearchButton() && (<button
         type="button"
         onClick={ () => setFilter(!filter) }
       >
@@ -35,9 +55,8 @@ function Header({ props: { history: { push, location: { pathname } } } }) {
           data-testid="search-top-btn"
           alt="search"
         />
-      </button>
-
-      {filter && <p>Busca</p>}
+      </button>)}
+      {filter && <SearchBar />}
     </div>
   );
 }
