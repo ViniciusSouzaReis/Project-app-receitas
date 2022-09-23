@@ -7,7 +7,6 @@ import Login from './pages/Login';
 
 function App() {
   return (
-<<<<<<< HEAD
     <BrowserRouter>
       <UserProvider>
         <Switch>
@@ -24,18 +23,6 @@ function App() {
         </Switch>
       </UserProvider>
     </BrowserRouter>
-=======
-    <div className="meals">
-      <span className="logo">TRYBE 2.0</span>
-      <object
-        className="rocksGlass"
-        type="image/svg+xml"
-        data={ rockGlass }
-      >
-        Glass
-      </object>
-    </div>
->>>>>>> origin
   );
 }
 
