@@ -1,7 +1,17 @@
-const PRODUCT_KEY = 'email';
+const EMAIL_KEY = 'email';
+const MEALSTOKEN_KEY = 'mealsToken';
+const DRINKSTOKEN_KEY = 'drinksToken';
 
-if (!JSON.parse(localStorage.getItem(PRODUCT_KEY))) {
-  localStorage.setItem(PRODUCT_KEY, JSON.stringify([]));
+if (!JSON.parse(localStorage.getItem(EMAIL_KEY))) {
+  localStorage.setItem(EMAIL_KEY, JSON.stringify([]));
+}
+
+if (!JSON.parse(localStorage.getItem(MEALSTOKEN_KEY))) {
+  localStorage.setItem(MEALSTOKEN_KEY, JSON.stringify([]));
+}
+
+if (!JSON.parse(localStorage.getItem(DRINKSTOKEN_KEY))) {
+  localStorage.setItem(DRINKSTOKEN_KEY, JSON.stringify([]));
 }
 const readProductCard = (id) => JSON.parse(localStorage.getItem(id)) || [];
 
