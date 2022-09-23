@@ -26,16 +26,12 @@ function Header({ props: { history: { push, location: { pathname } } } }) {
 
   const containSearchButton = () => {
     switch (pathname) {
-      case '/profile':
-        return false;
-      case '/done-recipes':
-        return false;
-      case '/favorite-recipes':
-        return false;
-      default:
-        return true;
+    case '/profile': return false;
+    case '/done-recipes': return false;
+    case '/favorite-recipes': return false;
+    default: return true;
     }
-  }
+  };
 
   return (
     <div>
@@ -46,16 +42,18 @@ function Header({ props: { history: { push, location: { pathname } } } }) {
       >
         <img src={ perfilIcon } data-testid="profile-top-btn" alt="profile" />
       </button>
-      {containSearchButton() && (<button
-        type="button"
-        onClick={ () => setFilter(!filter) }
-      >
-        <img
-          src={ searchIcon }
-          data-testid="search-top-btn"
-          alt="search"
-        />
-      </button>)}
+      {containSearchButton() && (
+        <button
+          type="button"
+          onClick={ () => setFilter(!filter) }
+        >
+          <img
+            src={ searchIcon }
+            data-testid="search-top-btn"
+            alt="search"
+          />
+        </button>
+      )}
       {filter && <SearchBar />}
     </div>
   );
