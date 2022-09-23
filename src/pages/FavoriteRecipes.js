@@ -1,9 +1,9 @@
 import React from 'react';
 import Header from '../components/Header';
 
-function FavoriteRecipes(props) {
+function FavoriteRecipes() {
   return (
-    <div><Header props={ props } /></div>
+    <div><Header /></div>
   );
 }
 

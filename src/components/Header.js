@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
+// import PropTypes from 'prop-types';
 import perfilIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import SearchBar from './SearchBar';
 
-function Header({ props: { history: { push, location: { pathname } } } }) {
+// { props: { history: { push, location: { pathname } } } }
+
+function Header() {
   const [filter, setFilter] = useState(false);
+  const { push, location: { pathname } } = useHistory();
 
   const title = () => {
     switch (pathname) {
@@ -59,15 +63,15 @@ function Header({ props: { history: { push, location: { pathname } } } }) {
   );
 }
 
-Header.propTypes = {
-  props: PropTypes.shape({
-    history: PropTypes.shape({
-      push: PropTypes.func.isRequired,
-      location: PropTypes.shape({
-        pathname: PropTypes.string.isRequired,
-      }).isRequired,
-    }).isRequired,
-  }).isRequired,
-};
+// Header.propTypes = {
+//   props: PropTypes.shape({
+//     history: PropTypes.shape({
+//       push: PropTypes.func.isRequired,
+//       location: PropTypes.shape({
+//         pathname: PropTypes.string.isRequired,
+//       }).isRequired,
+//     }).isRequired,
+//   }).isRequired,
+// };
 
 export default Header;
