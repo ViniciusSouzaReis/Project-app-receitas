@@ -4,7 +4,7 @@ import UserContext from '../contexts/UserContext';
 
 function UserProvider({ children }) {
   const [email, setEmail] = useState({
-    email: 'aaa',
+    email: '',
   });
 
   const contextValues = useMemo(() => ({
