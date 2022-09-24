@@ -22,7 +22,7 @@ function SearchBar() {
   console.log(apiReturn);
 
   return (
-    <div>
+    <div data-testid="search-input">
       <label htmlFor="ingredient">
         Ingredient
         <input

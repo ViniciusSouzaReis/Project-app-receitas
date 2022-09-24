@@ -1,10 +1,10 @@
 import React from 'react';
 import Header from '../components/Header';
 
-function Recipes() {
+function FavoriteRecipes() {
   return (
     <div><Header /></div>
   );
 }
 
-export default Recipes;
+export default FavoriteRecipes;
