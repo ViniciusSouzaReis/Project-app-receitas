@@ -108,7 +108,7 @@ function Login() {
           data-testid="login-submit-btn"
         >
           <span className="icon">
-            <i className="fa-solid fa-wallet" />
+            <i className="fa-solid fa-utensils" style={ { marginRight: '20px' } } />
           </span>
           <span>
             Entrar
