@@ -5,7 +5,7 @@ import { saveProductCard } from '../services/userLocalStorage';
 
 function Login() {
   const history = useHistory();
-  const { email, setEmail } = useContext(UserContext);
+  const { setEmail } = useContext(UserContext);
   const [newEmail, setNewEmail] = useState({
     email: '',
   });
@@ -21,9 +21,10 @@ function Login() {
     const emailRegex = /^[^@^ ]+@[^@^ ]+\.[a-z]{2,3}(\.[a-z]{2})?$/;
     const passwordRegex = /^[0-9]{6}/;
 
-    if (emailRegex.test(email)) {
+    if (emailRegex.test(newEmail.email)) {
       emailP.className = fullClass;
     } else { emailP.className = failClass; }
+    console.log(emailRegex.test(newEmail.email));
 
     if (passwordRegex.test(password)) {
       passwordP.className = fullClass;
@@ -51,74 +52,70 @@ function Login() {
   };
 
   return (
-    <div>
-      <form
-        onSubmit={ formSubmit }
-        style={ { backgroundColor: '#598C58', color: 'greenyellow' } }
-        className="formTitle"
-      >
-        <h1 className="myTitle fontTitle">
-          App receitas
-          {' '}
-          {/* <img src={ wallet } alt="wallet" className="walletImg" /> */}
-        </h1>
-        <div className="field">
-          <p className="control has-icons-left has-icons-right">
-            <input
-              id="email"
-              type="email"
-              name="email"
-              value={ newEmail.email }
-              placeholder="email"
-              className="input is-primary is-small is-rounded"
-              data-testid="email-input"
-              onChange={ handleChange }
-            />
-            {/* <span className="icon is-small is-left">
-              <i className="fas fa-envelope" />
-            </span>
-            <span className="icon is-small is-right">
-              <i id="email" className="fa-regular fa-circle-xmark" />
-            </span> */}
-          </p>
-        </div>
-        <div className="field">
-          <p className="control has-icons-left has-icons-right">
-            <input
-              id="password"
-              type="password"
-              name="password"
-              value={ password }
-              placeholder="senha"
-              className="input is-primary is-small is-rounded"
-              data-testid="password-input"
-              onChange={ handleChange }
-            />
-            {/* <span className="icon is-small is-left">
-              <i className="fas fa-lock" />
-            </span>
-            <span className="icon is-small is-right">
-              <i id="password" className="fa-regular fa-circle-xmark" />
-            </span> */}
-          </p>
-        </div>
-        <p className="buttons">
-          <button
-            type="submit"
-            disabled={ btnIsDisabled }
-            className="btnLogin button is-dark is-responsive is-outlined btnShadow"
-            data-testid="login-submit-btn"
-          >
-            {/* <span className="icon">
-              <i className="fa-solid fa-wallet" />
-            </span> */}
-            <span>
-              Entrar
-            </span>
-          </button>
+    <form
+      onSubmit={ formSubmit }
+      style={ { backgroundColor: '#598C58', color: 'greenyellow' } }
+      className="formTitle"
+    >
+      <h1 className="myTitle fontTitle">
+        App receitas
+        {' '}
+        {/* <img src={ wallet } alt="wallet" className="walletImg" /> */}
+      </h1>
+      <div className="field">
+        <p className="control has-icons-left has-icons-right">
+          <input
+            type="email"
+            name="email"
+            value={ newEmail.email }
+            placeholder="email"
+            className="input is-primary is-small is-rounded"
+            data-testid="email-input"
+            onChange={ handleChange }
+          />
+          <span className="icon is-small is-left">
+            <i className="fas fa-envelope" />
+          </span>
+          <span className="icon is-small is-right">
+            <i id="email" className="fa-regular fa-circle-xmark" />
+          </span>
         </p>
-      </form>
-    </div>
+      </div>
+      <div className="field">
+        <p className="control has-icons-left has-icons-right">
+          <input
+            type="password"
+            name="password"
+            value={ password }
+            placeholder="senha"
+            className="input is-primary is-small is-rounded"
+            data-testid="password-input"
+            onChange={ handleChange }
+          />
+          <span className="icon is-small is-left">
+            <i className="fas fa-lock" />
+          </span>
+          <span className="icon is-small is-right">
+            <i id="password" className="fa-regular fa-circle-xmark" />
+          </span>
+        </p>
+      </div>
+      <p className="buttons">
+        <button
+          type="submit"
+          disabled={ btnIsDisabled }
+          className="btnLogin button is-dark is-responsive is-outlined btnShadow"
+          data-testid="login-submit-btn"
+        >
+          <span className="icon">
+            <i className="fa-solid fa-wallet" />
+          </span>
+          <span>
+            Entrar
+          </span>
+        </button>
+      </p>
+    </form>
   );
 }
 

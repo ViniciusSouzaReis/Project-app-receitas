@@ -6,7 +6,9 @@
     "node": "16"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.2.0",
     "bootstrap": "^5.2.0",
+    "bulma": "^0.9.4",
     "clipboard-copy": "^4.0.1",
     "prop-types": "^15.8.1",
     "react": "^17.0.2",
