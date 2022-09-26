@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import RecipesContext from '../Api-Context/contexts/RecipesContext';
+import BodyDetail from '../components/BodyDetail';
 
 let OK_FETCH = true;
 
@@ -9,7 +10,7 @@ function RecipesDetails() {
   const { apiFetch, apiReturn } = useContext(RecipesContext);
   const { location: { pathname } } = useHistory();
   const arrayPath = pathname.split('/');
-  console.log(arrayPath);
+  console.log(arrayPath[1]);
   console.log(apiReturn);
 
   useEffect(() => {
@@ -24,7 +25,21 @@ function RecipesDetails() {
   }, [apiFetch, arrayPath]);
 
   return (
-    <div>RecipesDetails</div>
+    (apiReturn.length > 0) && (
+      (arrayPath[1] === 'drinks')
+        ? (
+          <BodyDetail
+            imgUrl={ apiReturn[0].strDrinkThumb }
+            nameRecipie={ apiReturn[0].strDrink }
+          />
+        )
+        : (
+          <BodyDetail
+            imgUrl={ apiReturn[0].strMealThumb }
+            nameRecipie={ apiReturn[0].strMeal }
+          />
+        )
+    )
   );
 }
 
