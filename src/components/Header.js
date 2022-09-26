@@ -38,7 +38,7 @@ function Header() {
   };
 
   return (
-    <div>
+    <header>
       {title()}
       <button
         type="button"
@@ -59,7 +59,7 @@ function Header() {
         </button>
       )}
       {filter && <SearchBar />}
-    </div>
+    </header>
   );
 }
 
