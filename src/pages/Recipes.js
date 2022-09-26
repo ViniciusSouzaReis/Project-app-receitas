@@ -1,12 +1,10 @@
 import React, { useContext, useEffect } from 'react';
-import { useHistory }/* , { useContext } */ from 'react';
-// import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import RecipesContext from '../Api-Context/contexts/RecipesContext';
 import CardRecipies from '../components/CardRecipies';
-import Categories from '../components/Categories-router-dom';
+import Categories from '../components/Categories';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
-// import RecipesContext from '../Api-Context/contexts/RecipesContext';
 
 function Recipes() {
   const { apiReturn, apiFetch } = useContext(RecipesContext);
@@ -15,7 +13,9 @@ function Recipes() {
   useEffect(() => {
     if (pathname === '/meals') { apiFetch('meal'); }
     if (pathname === '/drinks') { apiFetch('cocktail'); }
-  }, []);
+  }, [pathname]);
+
+  const maxCards = 12;
 
   return (
     <div>
@@ -24,6 +24,7 @@ function Recipes() {
         <Categories />
         {(apiReturn.length > 0 && pathname === '/meals')
           && apiReturn
+            .filter((element, index) => index < maxCards)
             .map(({ strMeal, idMeal, strMealThumb }, index) => (
               <CardRecipies
                 index={ index }
@@ -33,8 +34,9 @@ function Recipes() {
                 id={ idMeal }
                 type="meals"
               />))}
-        {(apiReturn.length > 0 && pathname === '/drinks' && apiReturn[0].strDrink === undefined)
+        {(apiReturn.length > 0 && pathname === '/drinks')
           && apiReturn
+            .filter((element, index) => index < maxCards)
             .map(({ strDrink, idDrink, strDrinkThumb }, index) => (
               <CardRecipies
                 index={ index }

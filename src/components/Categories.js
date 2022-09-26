@@ -12,8 +12,8 @@ function Categories() {
       let URL = '';
       let typeReturn = '';
       if (type === '/meals') {
-        URL = 'https://www.themealdb.com/api/json/v1/1/categories.php';
-        typeReturn = 'categories';
+        URL = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
+        typeReturn = 'meals';
       } else {
         URL = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
         typeReturn = 'drinks';
@@ -29,10 +29,14 @@ function Categories() {
   }, [pathname]);
 
   const handleClick = (name) => {
-    if (pathname === '/meals') {
+    if (name === '/meals') {
+      apiFetch('meal');
+    } else if (name === '/drinks') {
+      apiFetch('cocktail');
+    } else if (pathname === '/meals') {
       apiFetch('meal', 'categories', name);
     } else if (pathname === '/drinks') {
-      apiFetch('cocktail');
+      apiFetch('cocktail', 'categories', name);
     }
   };
 
@@ -51,7 +55,7 @@ function Categories() {
       <li
         data-testid="All-category-filter"
         role="presentation"
-        onClick={ handleClick }
+        onClick={ () => handleClick(pathname) }
       >
         All
       </li>
