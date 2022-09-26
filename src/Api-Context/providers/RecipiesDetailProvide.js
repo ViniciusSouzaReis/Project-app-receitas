@@ -1,9 +1,9 @@
 import React, { useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import RecipesContext from '../contexts/RecipesContext';
+import RecipiesDetailContext from '../contexts/RecipesContext';
 import searchFoodApiRequest from '../../services/searchFoodApiRequest';
 
-function RecipesProvider({ children }) {
+function RecipesDetailProvider({ children }) {
   const [apiReturn, setApiReturn] = useState([]);
 
   const apiFetch = async (type, filter, paramFilter) => {
@@ -25,14 +25,14 @@ function RecipesProvider({ children }) {
   }), [apiReturn]);
 
   return (
-    <RecipesContext.Provider value={ contextValues }>
+    <RecipiesDetailContext.Provider value={ contextValues }>
       {children}
-    </RecipesContext.Provider>
+    </RecipiesDetailContext.Provider>
   );
 }
 
-RecipesProvider.propTypes = {
+RecipesDetailProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export default RecipesProvider;
+export default RecipesDetailProvider;

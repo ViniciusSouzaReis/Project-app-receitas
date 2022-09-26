@@ -10,6 +10,9 @@ function searchFoodApiRequest(type, filter, paramFilter) {
   case 'first-letter':
     URL = `https://www.the${type}db.com/api/json/v1/1/search.php?f=${paramFilter}`;
     break;
+  case 'detail':
+    URL = `https://www.the${type}db.com/api/json/v1/1/lookup.php?i=${paramFilter}`;
+    break;
   default:
     URL = `https://www.the${type}db.com/api/json/v1/1/search.php?s=`;
   }
