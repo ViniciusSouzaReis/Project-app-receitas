@@ -20,20 +20,18 @@ function App() {
     <BrowserRouter>
       <UserProvider>
         <RecipesProvider>
-          <RecipesDetailProvider>
-            <Switch>
-              <Route exact path="/" component={ Login } />
-              <Route exact path="/meals" component={ Recipes } />
-              <Route exact path="/drinks" component={ Recipes } />
-              <Route exact path="/meals/:id" component={ RecipesDetails } />
-              <Route exact path="/drinks/:id" component={ RecipesDetails } />
-              <Route exact path="/meals/:id/in-progress" component={ RecipeInProgress } />
-              <Route exact path="/drinks/:id/in-progress" component={ RecipeInProgress } />
-              <Route exact path="/profile" component={ Profile } />
-              <Route exact path="/done-recipes" component={ DoneRecipes } />
-              <Route exact path="/favorite-recipes" component={ FavoriteRecipes } />
-            </Switch>
-          </RecipesDetailProvider>
+          <Switch>
+            <Route exact path="/" component={ Login } />
+            <Route exact path="/meals" component={ Recipes } />
+            <Route exact path="/drinks" component={ Recipes } />
+            <Route exact path="/meals/:id" component={ RecipesDetails } />
+            <Route exact path="/drinks/:id" component={ RecipesDetails } />
+            <Route exact path="/meals/:id/in-progress" component={ RecipeInProgress } />
+            <Route exact path="/drinks/:id/in-progress" component={ RecipeInProgress } />
+            <Route exact path="/profile" component={ Profile } />
+            <Route exact path="/done-recipes" component={ DoneRecipes } />
+            <Route exact path="/favorite-recipes" component={ FavoriteRecipes } />
+          </Switch>
         </RecipesProvider>
       </UserProvider>
     </BrowserRouter>
