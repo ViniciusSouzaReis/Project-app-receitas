@@ -13,7 +13,7 @@ import RecipeInProgress from './pages/RecipeInProgress';
 import Recipes from './pages/Recipes';
 import RecipesDetails from './pages/RecipesDetails';
 import RecipesProvider from './Api-Context/providers/RecipiesProvider';
-import RecipesDetailProvider from './Api-Context/providers/RecipiesDetailProvide';
+// import RecipesDetailProvider from './Api-Context/providers/RecipiesDetailProvide';
 
 function App() {
   return (

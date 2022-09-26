@@ -21,7 +21,6 @@ function RecipesProvider({ children }) {
       }
     } catch (e) {
       console.log(error);
-
     }
   };
 
