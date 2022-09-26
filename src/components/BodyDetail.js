@@ -1,11 +1,12 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import RecipesContext from '../Api-Context/contexts/RecipesContext';
 
-function BodyDetail({ imgUrl, nameRecipie }) {
+function BodyDetail({ imgUrl, nameRecipie, video }) {
   const { apiReturn } = useContext(RecipesContext);
   let arrayIgredients = [];
 
-  for (let index = 0; index < 16; index += 1) {
+  for (let index = 0; index < 100; index += 1) {
     arrayIgredients = [...arrayIgredients, apiReturn[0][`strIngredient${index}`]];
   }
 
@@ -14,7 +15,7 @@ function BodyDetail({ imgUrl, nameRecipie }) {
   return (
     <div
       className="card"
-      style={ { width: '18rem' } }
+      // style={ { width: '18rem' } }
     >
       <img
         src={ imgUrl }
@@ -42,11 +43,22 @@ function BodyDetail({ imgUrl, nameRecipie }) {
             </li>
           ))}
         </ul>
-        {/* <p className="card-text">{descRecipie}</p> */}
+        <p
+          className="card-text"
+          data-testid="instructions"
+        >
+          {apiReturn[0].strInstructions}
+        </p>
         {/* <a href="#" className="btn btn-primary">Go somewhere</a> */}
       </div>
     </div>
   );
 }
+
+BodyDetail.propTypes = {
+  imgUrl: PropTypes.string.isRequired,
+  nameRecipie: PropTypes.string.isRequired,
+  video: PropTypes.string.isRequired,
+};
 
 export default BodyDetail;
