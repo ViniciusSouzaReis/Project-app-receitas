@@ -1,7 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import UserContext from '../Api-Context/contexts/UserContext';
 import { saveProductCard } from '../services/userLocalStorage';
+
+let OK_CHANGE = false;
 
 function Login() {
   const history = useHistory();
@@ -12,26 +14,25 @@ function Login() {
   const [password, setPassword] = useState('');
   const [btnIsDisabled, setBtnIsDisabled] = useState(true);
 
-  const enabledButton = () => {
+  const enabledButton = useCallback(() => {
     const emailP = document.getElementById('email');
     const passwordP = document.getElementById('password');
     const fullClass = 'fas fa-check';
     const failClass = 'fa-regular fa-circle-xmark';
 
     const emailRegex = /^[^@^ ]+@[^@^ ]+\.[a-z]{2,3}(\.[a-z]{2})?$/;
-    const passwordRegex = /^[0-9]{6}/;
+    const passwordRegex = /^[0-9]{7}/;
 
     if (emailRegex.test(newEmail.email)) {
       emailP.className = fullClass;
     } else { emailP.className = failClass; }
-    console.log(emailRegex.test(newEmail.email));
 
     if (passwordRegex.test(password)) {
       passwordP.className = fullClass;
     } else { passwordP.className = failClass; }
 
     setBtnIsDisabled(!emailRegex.test(newEmail.email) || !passwordRegex.test(password));
-  };
+  }, [newEmail.email, password]);
 
   const formSubmit = (event) => {
     event.preventDefault();
@@ -42,14 +43,21 @@ function Login() {
     history.push('/meals');
   };
 
-  const handleChange = ({ target: { name, value } }) => {
+  const handleChange = useCallback(({ target: { name, value } }) => {
     if (name === 'email') {
       setNewEmail({ email: value });
     } else {
       setPassword(value);
     }
-    enabledButton();
-  };
+    OK_CHANGE = true;
+  }, []);
+
+  useEffect(() => {
+    if (OK_CHANGE) {
+      enabledButton();
+      OK_CHANGE = false;
+    }
+  }, [handleChange, enabledButton]);
 
   return (
     <form
