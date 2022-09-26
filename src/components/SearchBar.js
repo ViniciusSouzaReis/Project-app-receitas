@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
-import searchApiRequest from '../services/searchApiRequest';
+import { useHistory } from 'react-router-dom';
+import searchFoodApiRequest from '../services/searchFoodApiRequest';
+import searchDrinkApiRequest from '../services/searchDrinkApiRequest';
 
 function SearchBar() {
   const [radioButton, setRadioButton] = useState('');
   const [inputText, setInputText] = useState('');
   const [apiReturn, setApiReturn] = useState({});
+  const { location: { pathname } } = useHistory();
 
   const handleChange = ({ target: { id } }) => {
     setRadioButton(id);
@@ -14,19 +17,37 @@ function SearchBar() {
     setInputText(value);
   };
 
-  const handleClick = async () => {
+  const foodApiRequest = async () => {
     if (radioButton === 'first-letter' && inputText.length > 1) {
       global.alert('Your search must have only 1 (one) character');
     } else {
-      const request = await fetch(searchApiRequest(radioButton, inputText));
+      const request = await fetch(searchFoodApiRequest(radioButton, inputText));
       const response = await request.json();
       setApiReturn(response);
     }
   };
 
+  const drinkApiRequest = async () => {
+    if (radioButton === 'first-letter' && inputText.length > 1) {
+      global.alert('Your search must have only 1 (one) character');
+    } else {
+      const request = await fetch(searchDrinkApiRequest(radioButton, inputText));
+      const response = await request.json();
+      setApiReturn(response);
+    }
+  };
+
+  const handleClick = () => {
+    if (pathname === '/meals') {
+      foodApiRequest();
+    } else if (pathname === '/drinks') {
+      drinkApiRequest();
+    }
+  };
+
   console.log(apiReturn);
   console.log(radioButton);
-  console.log(inputText);
+  console.log(pathname);
 
   return (
     <div>

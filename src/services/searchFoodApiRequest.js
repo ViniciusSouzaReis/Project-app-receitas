@@ -1,4 +1,4 @@
-function searchApiRequest(param, param2) {
+function searchFoodApiRequest(param, param2) {
   let URL;
   switch (param) {
   case 'ingredient':
@@ -13,4 +13,4 @@ function searchApiRequest(param, param2) {
   return URL;
 }
 
-export default searchApiRequest;
+export default searchFoodApiRequest;
