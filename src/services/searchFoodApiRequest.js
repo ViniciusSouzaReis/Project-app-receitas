@@ -1,15 +1,19 @@
-function searchFoodApiRequest(param, param2) {
+function searchFoodApiRequest(type, filter, paramFilter) {
   let URL;
-  switch (param) {
+  switch (filter) {
   case 'ingredient':
-    URL = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${param2}`;
+    URL = `https://www.the${type}db.com/api/json/v1/1/filter.php?i=${paramFilter}`;
     break;
   case 'name':
-    URL = `https://www.themealdb.com/api/json/v1/1/search.php?s=${param2}`;
+    URL = `https://www.the${type}db.com/api/json/v1/1/search.php?s=${paramFilter}`;
+    break;
+  case 'first-letter':
+    URL = `https://www.the${type}db.com/api/json/v1/1/search.php?f=${paramFilter}`;
     break;
   default:
-    URL = `https://www.themealdb.com/api/json/v1/1/search.php?f=${param2}`;
+    URL = `https://www.the${type}db.com/api/json/v1/1/search.php?s=`;
   }
+
   return URL;
 }
 
