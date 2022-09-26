@@ -14,9 +14,17 @@ function RecipesProvider({ children }) {
       const response = await request.json();
       console.log(response);
       if (type === 'meal') {
-        setApiReturn(response.meals);
-      } else {
-        setApiReturn(response.drinks);
+        if (response.meals === null) {
+          setApiReturn(response);
+        } else {
+          setApiReturn(response.meals);
+        }
+      } else if (type === 'cocktail') {
+        if (response.drinks === null) {
+          setApiReturn(response);
+        } else {
+          setApiReturn(response.drinks);
+        }
       }
     } catch (e) {
       console.log(error);
