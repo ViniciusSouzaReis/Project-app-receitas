@@ -44,6 +44,10 @@ function SearchBar() {
       push(`${pathname}/${target[id]}`);
       OK_REDIRECT = false;
     }
+    if (!apiReturn[0] /* === undefined */) {
+      // apenas mudando algo
+      global.alert('Sorry, we haven\'t found any recipes for these filters.');
+    }
   }, [apiReturn, pathname, push]);
   console.log(apiReturn);
 
