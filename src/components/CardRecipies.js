@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function CardRecipies({ index, urlImage, nameRecipie, descRecipie }) {
+function CardRecipies({ index, urlImage, nameRecipie, id, type }) {
   return (
     <div
       className="card"
@@ -21,7 +21,7 @@ function CardRecipies({ index, urlImage, nameRecipie, descRecipie }) {
         >
           {nameRecipie}
         </h5>
-        <p className="card-text">{descRecipie}</p>
+        <p className="card-text">{id}</p>
         {/* <a href="#" className="btn btn-primary">Go somewhere</a> */}
       </div>
     </div>
@@ -32,7 +32,6 @@ CardRecipies.propTypes = {
   index: PropTypes.number.isRequired,
   urlImage: PropTypes.string.isRequired,
   nameRecipie: PropTypes.string.isRequired,
-  descRecipie: PropTypes.string.isRequired,
 };
 
 export default CardRecipies;
