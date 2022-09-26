@@ -3,26 +3,33 @@ import searchApiRequest from '../services/searchApiRequest';
 
 function SearchBar() {
   const [radioButton, setRadioButton] = useState('');
+  const [inputText, setInputText] = useState('');
   const [apiReturn, setApiReturn] = useState({});
 
   const handleChange = ({ target: { id } }) => {
     setRadioButton(id);
   };
 
+  const handleChangeInput = ({ target: { value } }) => {
+    setInputText(value);
+  };
+
   const handleClick = async () => {
-    if (radioButton === 'first-letter' && radioButton.length > 1) {
+    if (radioButton === 'first-letter' && inputText.length > 1) {
       global.alert('Your search must have only 1 (one) character');
     } else {
-      const request = await fetch(searchApiRequest(radioButton, {/* INPUT_RESULT */}));
+      const request = await fetch(searchApiRequest(radioButton, inputText));
       const response = await request.json();
       setApiReturn(response);
     }
   };
 
   console.log(apiReturn);
+  console.log(radioButton);
+  console.log(inputText);
 
   return (
-    <div data-testid="search-input">
+    <div>
       <label htmlFor="ingredient">
         Ingredient
         <input
@@ -51,6 +58,17 @@ function SearchBar() {
           data-testid="first-letter-search-radio"
           id="first-letter"
           onChange={ (e) => handleChange(e) }
+        />
+      </label>
+      <label htmlFor="input-text">
+        Search:
+        <input
+          name="input-text"
+          value={ inputText }
+          type="text"
+          data-testid="search-input"
+          id="input-text"
+          onChange={ (e) => handleChangeInput(e) }
         />
       </label>
       <button
