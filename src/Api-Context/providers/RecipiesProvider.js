@@ -8,13 +8,20 @@ function RecipesProvider({ children }) {
 
   const apiFetch = async (type, filter, paramFilter) => {
     const URL = searchFoodApiRequest(type, filter, paramFilter);
-    const request = await fetch(URL);
-    const response = await request.json();
 
-    if (type === 'meal') {
-      setApiReturn(response.meals);
-    } else {
-      setApiReturn(response.drinks);
+    console.log(URL);
+    try {
+      const request = await fetch(URL);
+      const response = await request.json();
+      console.log(response);
+      if (type === 'meal') {
+        setApiReturn(response.meals);
+      } else {
+        setApiReturn(response.drinks);
+      }
+    } catch (e) {
+      console.log(error);
+
     }
   };
 
