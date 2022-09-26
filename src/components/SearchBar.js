@@ -1,12 +1,13 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useMemo } from 'react';
 import { useHistory } from 'react-router-dom';
 import RecipesContext from '../Api-Context/contexts/RecipesContext';
+
+let OK_REDIRECT = false;
 
 function SearchBar() {
   const [radioButton, setRadioButton] = useState('');
   const [inputText, setInputText] = useState('');
-  // const [apiReturn, setApiReturn] = useState({});
-  const { location: { pathname } } = useHistory();
+  const { push, location: { pathname } } = useHistory();
   const { apiFetch, apiReturn } = useContext(RecipesContext);
 
   const handleChange = ({ target: { id } }) => {
@@ -31,8 +32,23 @@ function SearchBar() {
     } else if (pathname === '/drinks') {
       foodApiRequest('cocktail');
     }
+    OK_REDIRECT = true;
   };
 
+  useMemo(() => {
+    let id = 'idDrink';
+    if (pathname === '/meals') id = 'idMeal';
+
+    const target = apiReturn[0];
+    if (apiReturn.length === 1 && OK_REDIRECT === true) {
+      push(`${pathname}/${target[id]}`);
+      OK_REDIRECT = false;
+    }
+    if (!apiReturn[0] /* === undefined */) {
+      // apenas mudando algo
+      global.alert('Sorry, we haven\'t found any recipes for these filters.');
+    }
+  }, [apiReturn, pathname, push]);
   console.log(apiReturn);
 
   return (

@@ -1,10 +1,12 @@
 import React, { useContext, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory }/* , { useContext } */ from 'react';
+// import { useHistory } from 'react-router-dom';
 import RecipesContext from '../Api-Context/contexts/RecipesContext';
 import CardRecipies from '../components/CardRecipies';
-import Categories from '../components/Categories';
+import Categories from '../components/Categories-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+// import RecipesContext from '../Api-Context/contexts/RecipesContext';
 
 function Recipes() {
   const { apiReturn, apiFetch } = useContext(RecipesContext);
