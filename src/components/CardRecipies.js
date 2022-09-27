@@ -2,21 +2,27 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 
-function CardRecipies({ index, urlImage, nameRecipie, id, type }) {
+function CardRecipies({
+  index, urlImage, nameRecipie, id, type, width = '18rem', idTeste }) {
   const { push } = useHistory();
+  const { idCard, idTitle } = idTeste;
 
   const handleClick = () => {
     push(`${type}/${id}`);
   };
 
+  // console.log(idTitle);
+  // console.log(idCard);
+
   return (
     <div
       className="card"
       name={ id }
-      style={ { width: '18rem' } }
+      style={ { width } }
       role="presentation"
-      data-testid={ `${index}-recipe-card` }
+      data-testid={ `${index}-${idCard}` }
       onClick={ handleClick }
+      // style={ { width: size } }
     >
       <img
         src={ urlImage }
@@ -28,7 +34,7 @@ function CardRecipies({ index, urlImage, nameRecipie, id, type }) {
       <div className="card-body">
         <h5
           className="card-title"
-          data-testid={ `${index}-card-name` }
+          data-testid={ `${index}-${idTitle}` }
           role="presentation"
         >
           {nameRecipie}
@@ -46,6 +52,11 @@ CardRecipies.propTypes = {
   nameRecipie: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
+  width: PropTypes.string.isRequired,
+  idTeste: PropTypes.shape({
+    idCard: PropTypes.string.isRequired,
+    idTitle: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default CardRecipies;

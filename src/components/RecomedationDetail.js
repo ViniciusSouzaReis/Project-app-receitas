@@ -1,30 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import searchFoodApiRequest from '../services/searchFoodApiRequest';
+import CardRecipies from './CardRecipies';
 
 let OK_FETCH = true;
+const MAX_CARROUSEL = 6;
 
 function RecomedationDetail() {
   const [recomedations, setRecomedations] = useState([]);
   const { location: { pathname } } = useHistory();
   const arrayPath = pathname.split('/');
 
-  console.log(recomedations);
+  // console.log(recomedations[2].strMealThumb);
 
   async function apiFetchRecomedations(type, filter, paramFilter) {
     const URL = searchFoodApiRequest(type, filter, paramFilter);
-    // let URL = '';
-
-    // if (type === 'drinks') {
-    //   URL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
-    // } else {
-    //   URL = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
-    // }
 
     try {
       const request = await fetch(URL);
       const response = await request.json();
-      console.log(URL);
+      // console.log(URL);
 
       if (type === 'meal') {
         if (response.meals === null) {
@@ -56,9 +51,50 @@ function RecomedationDetail() {
   }, [arrayPath]);
 
   useEffect(() => () => { OK_FETCH = true; }, []);
+  //
 
   return (
-    <div>RecomedationDetail</div>
+    <div style={ { display: 'flex', width: '100%', overflowX: 'scroll' } }>
+      { (arrayPath[1] === 'drinks') ? (
+        recomedations.map((
+          { strMeal, idMeal, strMealThumb },
+          index,
+        ) => index < MAX_CARROUSEL && (
+          <div key={ index }>
+            <CardRecipies
+              index={ index }
+              key={ idMeal }
+              width="50vw"
+              urlImage={ strMealThumb }
+              nameRecipie={ strMeal }
+              id={ idMeal }
+              type="meals"
+              idTeste={ {
+                idCard: 'recommendation-card', idTitle: 'recommendation-title' } }
+            />
+          </div>
+        ))
+      ) : (
+        recomedations.map((
+          { strDrink, idDrink, strDrinkThumb },
+          index,
+        ) => index < MAX_CARROUSEL && (
+          <div key={ index }>
+            <CardRecipies
+              index={ index }
+              key={ idDrink }
+              width="50vw"
+              urlImage={ strDrinkThumb }
+              nameRecipie={ strDrink }
+              id={ idDrink }
+              type="drinks"
+              idTeste={ {
+                idCard: 'recommendation-card', idTitle: 'recommendation-title' } }
+            />
+          </div>
+        ))
+      )}
+    </div>
   );
 }
 

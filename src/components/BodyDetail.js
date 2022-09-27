@@ -26,7 +26,7 @@ function BodyDetail({ imgUrl, nameRecipie, video }) {
   return (
     <div
       className="card"
-      style={ { width: '90%' } }
+      style={ { width: '98%', marginTop: '5px' } }
     >
       <img
         src={ imgUrl }
@@ -34,6 +34,7 @@ function BodyDetail({ imgUrl, nameRecipie, video }) {
         alt={ nameRecipie }
         data-testid="recipe-photo"
         role="presentation"
+        style={ { height: '70vh' } }
       />
       <div className="card-body">
         <h5

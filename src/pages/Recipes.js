@@ -40,6 +40,7 @@ function Recipes() {
                 nameRecipie={ strMeal }
                 id={ idMeal }
                 type="meals"
+                idTeste={ { idCard: 'recipe-card', idTitle: 'card-name' } }
               />))}
         {(apiReturn.length > 0 && pathname === '/drinks')
           && apiReturn
@@ -52,6 +53,7 @@ function Recipes() {
                 nameRecipie={ strDrink }
                 id={ idDrink }
                 type="drinks"
+                idTeste={ { idCard: 'recipe-card', idTitle: 'card-name' } }
               />))}
       </main>
       <div><Footer /></div>
