@@ -46,6 +46,15 @@ function RecipesDetails() {
             />
           )
       )}
+      <button
+        type="button"
+        data-testid="start-recipe-btn"
+        style={ { position: 'fixed', marginBottom: '0px', marginTop: '610px' } }
+        id="btn-start-recipes"
+      >
+        Start Recipe
+      </button>
+
       <RecomedationDetail />
     </div>
   );
