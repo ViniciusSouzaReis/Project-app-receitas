@@ -4,6 +4,7 @@ import searchFoodApiRequest from '../services/searchFoodApiRequest';
 import CardRecipies from './CardRecipies';
 
 let OK_FETCH = true;
+const MAX_CARROUSEL = 6;
 
 function RecomedationDetail() {
   const [recomedations, setRecomedations] = useState([]);
@@ -55,7 +56,10 @@ function RecomedationDetail() {
   return (
     <div style={ { display: 'flex', width: '100%', overflowX: 'scroll' } }>
       { (arrayPath[1] === 'drinks') ? (
-        recomedations.map(({ strMeal, idMeal, strMealThumb }, index) => (
+        recomedations.map((
+          { strMeal, idMeal, strMealThumb },
+          index,
+        ) => index < MAX_CARROUSEL && (
           <div key={ index }>
             <CardRecipies
               index={ index }
@@ -66,12 +70,15 @@ function RecomedationDetail() {
               id={ idMeal }
               type="meals"
               idTeste={ {
-                idCcard: 'recommendation-card', idTtitle: 'recommendation-title' } }
+                idCard: 'recommendation-card', idTitle: 'recommendation-title' } }
             />
           </div>
         ))
       ) : (
-        recomedations.map(({ strDrink, idDrink, strDrinkThumb }, index) => (
+        recomedations.map((
+          { strDrink, idDrink, strDrinkThumb },
+          index,
+        ) => index < MAX_CARROUSEL && (
           <div key={ index }>
             <CardRecipies
               index={ index }
@@ -82,7 +89,7 @@ function RecomedationDetail() {
               id={ idDrink }
               type="drinks"
               idTeste={ {
-                idCcard: 'recommendation-card', idTtitle: 'recommendation-title' } }
+                idCard: 'recommendation-card', idTitle: 'recommendation-title' } }
             />
           </div>
         ))

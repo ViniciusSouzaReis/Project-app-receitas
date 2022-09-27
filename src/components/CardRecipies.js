@@ -3,15 +3,16 @@ import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 
 function CardRecipies({
-  index, urlImage, nameRecipie, id, type,
-  width = '18rem', idTeste: { idCard, id_title } }) {
+  index, urlImage, nameRecipie, id, type, width = '18rem', idTeste }) {
   const { push } = useHistory();
+  const { idCard, idTitle } = idTeste;
 
   const handleClick = () => {
     push(`${type}/${id}`);
   };
 
-  console.log(width);
+  // console.log(idTitle);
+  // console.log(idCard);
 
   return (
     <div
@@ -33,7 +34,7 @@ function CardRecipies({
       <div className="card-body">
         <h5
           className="card-title"
-          data-testid={ `${index}-${id_title}` }
+          data-testid={ `${index}-${idTitle}` }
           role="presentation"
         >
           {nameRecipie}
@@ -51,6 +52,11 @@ CardRecipies.propTypes = {
   nameRecipie: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
+  width: PropTypes.string.isRequired,
+  idTeste: PropTypes.shape({
+    idCard: PropTypes.string.isRequired,
+    idTitle: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default CardRecipies;
