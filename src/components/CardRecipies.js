@@ -2,21 +2,26 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 
-function CardRecipies({ index, urlImage, nameRecipie, id, type }) {
+function CardRecipies({
+  index, urlImage, nameRecipie, id, type,
+  width = '18rem', idTeste: { idCard, id_title } }) {
   const { push } = useHistory();
 
   const handleClick = () => {
     push(`${type}/${id}`);
   };
 
+  console.log(width);
+
   return (
     <div
       className="card"
       name={ id }
-      style={ { width: '18rem' } }
+      style={ { width } }
       role="presentation"
-      data-testid={ `${index}-recipe-card` }
+      data-testid={ `${index}-${idCard}` }
       onClick={ handleClick }
+      // style={ { width: size } }
     >
       <img
         src={ urlImage }
@@ -28,7 +33,7 @@ function CardRecipies({ index, urlImage, nameRecipie, id, type }) {
       <div className="card-body">
         <h5
           className="card-title"
-          data-testid={ `${index}-card-name` }
+          data-testid={ `${index}-${id_title}` }
           role="presentation"
         >
           {nameRecipie}
