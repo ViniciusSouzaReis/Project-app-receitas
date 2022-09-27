@@ -6,21 +6,14 @@ import Categories from '../components/Categories';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 
-let OK_FETCH = true;
-
 function Recipes() {
   const { apiReturn, apiFetch } = useContext(RecipesContext);
   const { location: { pathname } } = useHistory();
 
   useEffect(() => {
-    if (OK_FETCH) {
-      if (pathname === '/meals') { apiFetch('meal'); }
-      if (pathname === '/drinks') { apiFetch('cocktail'); }
-    }
-    OK_FETCH = false;
-  }, [apiFetch, pathname]);
-
-  useEffect(() => () => { OK_FETCH = true; }, []);
+    if (pathname === '/meals') { apiFetch('meal'); }
+    if (pathname === '/drinks') { apiFetch('cocktail'); }
+  }, [pathname]);
 
   const maxCards = 12;
 

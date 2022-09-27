@@ -4,6 +4,7 @@ import RecipesContext from '../Api-Context/contexts/RecipesContext';
 
 function Categories() {
   const { location: { pathname } } = useHistory();
+  const [filterSelected, setFilterSelected] = useState('all');
   const [categories, setCategories] = useState([]);
   const { apiFetch } = useContext(RecipesContext);
 
@@ -29,13 +30,19 @@ function Categories() {
   }, [pathname]);
 
   const handleClick = (name) => {
-    if (name === '/meals') {
+    if ((pathname === '/meals' && name === filterSelected)
+    || (pathname === '/meals' && name === 'all')) {
+      setFilterSelected('all');
       apiFetch('meal');
-    } else if (name === '/drinks') {
+    } else if ((pathname === '/drinks' && name === filterSelected)
+    || (pathname === '/drinks' && name === 'all')) {
+      setFilterSelected('all');
       apiFetch('cocktail');
     } else if (pathname === '/meals') {
+      setFilterSelected(name);
       apiFetch('meal', 'categories', name);
     } else if (pathname === '/drinks') {
+      setFilterSelected(name);
       apiFetch('cocktail', 'categories', name);
     }
   };
@@ -55,7 +62,7 @@ function Categories() {
       <li
         data-testid="All-category-filter"
         role="presentation"
-        onClick={ () => handleClick(pathname) }
+        onClick={ () => handleClick('all') }
       >
         All
       </li>
