@@ -1,12 +1,44 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 
 function Profile() {
+  const { push } = useHistory();
+  const { email } = JSON.parse(localStorage.getItem('user'));
+
+  const logout = () => {
+    localStorage.clear();
+    push('/');
+  };
+
   return (
     <div>
       <div><Header /></div>
-      <div>Profile</div>
+      <p data-testid="profile-email">{email}</p>
+      <nav>
+        <button
+          type="button"
+          data-testid="profile-done-btn"
+          onClick={ () => push('/done-recipes') }
+        >
+          Done Recipes
+        </button>
+        <button
+          type="button"
+          data-testid="profile-favorite-btn"
+          onClick={ () => push('/favorite-recipes') }
+        >
+          Favorite Recipes
+        </button>
+        <button
+          type="button"
+          data-testid="profile-logout-btn"
+          onClick={ logout }
+        >
+          Logout
+        </button>
+      </nav>
       <div><Footer /></div>
     </div>
   );
