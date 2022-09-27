@@ -1,14 +1,17 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+// import { CopyToClipboard } from 'react-copy-to-clipboard';
 import RecipesContext from '../Api-Context/contexts/RecipesContext';
 import BodyDetail from '../components/BodyDetail';
 import RecomedationDetail from '../components/RecomedationDetail';
+import shareIcon from '../images/shareIcon.svg';
 import { readInProgressRecipes } from '../services/inProgressRecipesLocalStorage';
 import { saveProductCard } from '../services/userLocalStorage';
 
 let OK_FETCH = true;
 const IN_PROGRESS_RECIPES = 'inProgressRecipes';
 const DONE_RECIPES = 'doneRecipes';
+const copy = require('clipboard-copy');
 
 function RecipesDetails() {
   const { apiFetch, apiReturn } = useContext(RecipesContext);
@@ -17,6 +20,7 @@ function RecipesDetails() {
   const [doneStorage, setDoneStorage] = useState([]);
   const [existInProgress, setExistInProgress] = useState(false);
   const [existDoneRecipe, setExistDoneRecipe] = useState(false);
+  const [clippedText, setClippedText] = useState(false);
   const arrayPath = pathname.split('/');
   // console.log(arrayPath[1]);
   // console.log(apiReturn);
@@ -108,6 +112,11 @@ function RecipesDetails() {
     saveProductCard('favoriteRecipes', newStored);
   };
 
+  const handleShare = async () => {
+    copy(`http://localhost:3000${pathname}`);
+    setClippedText(!clippedText);
+  };
+
   return (
     <div style={ { display: 'flex', flexDirection: 'column', alignItems: 'center' } }>
       {(apiReturn.length > 0) && (
@@ -138,18 +147,25 @@ function RecipesDetails() {
           {(existInProgress) ? ('Continue Recipe') : ('Start Recipe')}
         </button>
       )}
+      {(clippedText) && (
+        <p>Link copied!</p>
+      )}
       <button
         type="button"
         data-testid="share-btn"
+        onClick={ handleShare }
       >
-        Share
+        <img
+          src={ shareIcon }
+          alt="share"
+        />
       </button>
       <button
         type="button"
         data-testid="favorite-btn"
         onClick={ favoriteButton }
       >
-        Favorite
+        Favorites
       </button>
       <RecomedationDetail />
     </div>
