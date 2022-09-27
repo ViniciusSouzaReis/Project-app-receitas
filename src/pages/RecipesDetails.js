@@ -5,8 +5,9 @@ import RecipesContext from '../Api-Context/contexts/RecipesContext';
 import BodyDetail from '../components/BodyDetail';
 import RecomedationDetail from '../components/RecomedationDetail';
 import shareIcon from '../images/shareIcon.svg';
-import { readInProgressRecipes } from '../services/inProgressRecipesLocalStorage';
-import { saveProductCard } from '../services/userLocalStorage';
+import { readInProgressRecipes,
+  addInProgressRecipes } from '../services/inProgressRecipesLocalStorage';
+// import { addInProgressRecipes } from '../services/inProgressRecipesLocalStorage';
 
 let OK_FETCH = true;
 const IN_PROGRESS_RECIPES = 'inProgressRecipes';
@@ -83,7 +84,7 @@ function RecipesDetails() {
 
   const favoriteButton = () => {
     if (!JSON.parse(localStorage.getItem('favoriteRecipes'))) {
-      localStorage.setItem('favoriteRecipes', JSON.stringify({}));
+      localStorage.setItem('favoriteRecipes', JSON.stringify([]));
     }
     let newFave = {};
     if (arrayPath[1] === 'meals') {
@@ -107,9 +108,10 @@ function RecipesDetails() {
         image: apiReturn[0].strDrinkThumb,
       };
     }
-    const stored = localStorage.getItem('favoriteRecipes');
-    const newStored = [...stored, newFave];
-    saveProductCard('favoriteRecipes', newStored);
+    // const stored = localStorage.getItem('favoriteRecipes');
+    addInProgressRecipes('favoriteRecipes', newFave);
+    /* if (stored) {
+    } */
   };
 
   const handleShare = async () => {
