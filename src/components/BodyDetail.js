@@ -34,6 +34,7 @@ function BodyDetail({ imgUrl, nameRecipie, video }) {
         alt={ nameRecipie }
         data-testid="recipe-photo"
         role="presentation"
+        style={ { height: '70vh' } }
       />
       <div className="card-body">
         <h5
