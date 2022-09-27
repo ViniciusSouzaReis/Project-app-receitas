@@ -2,17 +2,17 @@ import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import RecipesContext from '../Api-Context/contexts/RecipesContext';
 import BodyDetail from '../components/BodyDetail';
+import RecomedationDetail from '../components/RecomedationDetail';
 
 let OK_FETCH = true;
 
 function RecipesDetails() {
-  // const { apiReturn, apiFetch } = useContext(RecipiesDetailContext);
   const { apiFetch, apiReturn } = useContext(RecipesContext);
   const { location: { pathname } } = useHistory();
   const arrayPath = pathname.split('/');
-  console.log(arrayPath[1]);
-  console.log(apiReturn);
-  console.log(OK_FETCH);
+  // console.log(arrayPath[1]);
+  // console.log(apiReturn);
+  // console.log(OK_FETCH);
 
   useEffect(() => {
     if (OK_FETCH) {
@@ -28,23 +28,26 @@ function RecipesDetails() {
   useEffect(() => () => { OK_FETCH = true; }, []);
 
   return (
-    (apiReturn.length > 0) && (
-      (arrayPath[1] === 'drinks')
-        ? (
-          <BodyDetail
-            imgUrl={ apiReturn[0].strDrinkThumb }
-            nameRecipie={ apiReturn[0].strDrink }
-            video={ null }
-          />
-        )
-        : (
-          <BodyDetail
-            imgUrl={ apiReturn[0].strMealThumb }
-            nameRecipie={ apiReturn[0].strMeal }
-            video={ apiReturn[0].strYoutube }
-          />
-        )
-    )
+    <div>
+      {(apiReturn.length > 0) && (
+        (arrayPath[1] === 'drinks')
+          ? (
+            <BodyDetail
+              imgUrl={ apiReturn[0].strDrinkThumb }
+              nameRecipie={ apiReturn[0].strDrink }
+              video={ null }
+            />
+          )
+          : (
+            <BodyDetail
+              imgUrl={ apiReturn[0].strMealThumb }
+              nameRecipie={ apiReturn[0].strMeal }
+              video={ apiReturn[0].strYoutube }
+            />
+          )
+      )}
+      <RecomedationDetail />
+    </div>
   );
 }
 

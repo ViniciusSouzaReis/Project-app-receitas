@@ -19,9 +19,9 @@ function BodyDetail({ imgUrl, nameRecipie, video }) {
     }
   }
 
-  console.log(arrayIgredients);
-  console.log(arrayMesures);
-  console.log(arrayPath[1]);
+  // console.log(arrayIgredients);
+  // console.log(arrayMesures);
+  // console.log(arrayPath[1]);
 
   return (
     <div

@@ -9,11 +9,10 @@ function RecipesProvider({ children }) {
   const apiFetch = async (type, filter, paramFilter) => {
     const URL = searchFoodApiRequest(type, filter, paramFilter);
 
-    console.log(URL);
     try {
       const request = await fetch(URL);
       const response = await request.json();
-      console.log(response);
+
       if (type === 'meal') {
         if (response.meals === null) {
           setApiReturn(response);
