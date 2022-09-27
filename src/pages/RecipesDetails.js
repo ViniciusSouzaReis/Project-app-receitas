@@ -106,17 +106,18 @@ function RecipesDetails() {
           {(existInProgress) ? ('Continue Recipe') : ('Start Recipe')}
         </button>
       )}
-      {/* {(existInProgress) && (
-        <button
-          type="button"
-          data-testid="start-recipe-btn"
-          style={ { position: 'fixed', marginBottom: '0px', marginTop: '610px' } }
-          id="btn-start-recipes"
-          onClick={ handleClick }
-        >
-          Continue Recipe
-        </button>
-      )} */}
+      <button
+        type="button"
+        data-testid="share-btn"
+      >
+        Share
+      </button>
+      <button
+        type="button"
+        data-testid="favorite-btn"
+      >
+        Favorite
+      </button>
       <RecomedationDetail />
     </div>
   );
