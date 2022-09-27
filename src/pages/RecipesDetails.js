@@ -5,7 +5,9 @@ import RecipesContext from '../Api-Context/contexts/RecipesContext';
 import BodyDetail from '../components/BodyDetail';
 import RecomedationDetail from '../components/RecomedationDetail';
 import shareIcon from '../images/shareIcon.svg';
-import { readInProgressRecipes } from '../services/inProgressRecipesLocalStorage';
+import { readInProgressRecipes,
+  addInProgressRecipes } from '../services/inProgressRecipesLocalStorage';
+// import { addInProgressRecipes } from '../services/inProgressRecipesLocalStorage';
 
 let OK_FETCH = true;
 const IN_PROGRESS_RECIPES = 'inProgressRecipes';
@@ -80,6 +82,38 @@ function RecipesDetails() {
     push(`${pathname}/in-progress`);
   };
 
+  const favoriteButton = () => {
+    if (!JSON.parse(localStorage.getItem('favoriteRecipes'))) {
+      localStorage.setItem('favoriteRecipes', JSON.stringify([]));
+    }
+    let newFave = {};
+    if (arrayPath[1] === 'meals') {
+      newFave = {
+        id: apiReturn[0].idMeal,
+        type: 'meal',
+        nationality: apiReturn[0].strArea,
+        category: apiReturn[0].strCategory ? apiReturn[0].strCategory : '',
+        alcoholicOrNot: '',
+        name: apiReturn[0].strMeal,
+        image: apiReturn[0].strMealThumb,
+      };
+    } else {
+      newFave = {
+        id: apiReturn[0].idDrink,
+        type: 'drink',
+        nationality: apiReturn[0].strArea ? apiReturn[0].strArea : '',
+        category: apiReturn[0].strCategory ? apiReturn[0].strCategory : '',
+        alcoholicOrNot: apiReturn[0].strAlcoholic ? apiReturn[0].strAlcoholic : '',
+        name: apiReturn[0].strDrink,
+        image: apiReturn[0].strDrinkThumb,
+      };
+    }
+    // const stored = localStorage.getItem('favoriteRecipes');
+    addInProgressRecipes('favoriteRecipes', newFave);
+    /* if (stored) {
+    } */
+  };
+
   const handleShare = async () => {
     copy(`http://localhost:3000${pathname}`);
     setClippedText(!clippedText);
@@ -131,6 +165,7 @@ function RecipesDetails() {
       <button
         type="button"
         data-testid="favorite-btn"
+        onClick={ favoriteButton }
       >
         Favorites
       </button>
