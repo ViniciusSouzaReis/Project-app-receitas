@@ -26,7 +26,7 @@ function BodyDetail({ imgUrl, nameRecipie, video }) {
   return (
     <div
       className="card"
-      style={ { width: '90%' } }
+      style={ { width: '98%', marginTop: '5px' } }
     >
       <img
         src={ imgUrl }

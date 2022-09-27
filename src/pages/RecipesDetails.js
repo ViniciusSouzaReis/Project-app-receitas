@@ -28,7 +28,7 @@ function RecipesDetails() {
   useEffect(() => () => { OK_FETCH = true; }, []);
 
   return (
-    <div>
+    <div style={ { display: 'flex', flexDirection: 'column', alignItems: 'center' } }>
       {(apiReturn.length > 0) && (
         (arrayPath[1] === 'drinks')
           ? (
