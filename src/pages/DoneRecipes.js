@@ -1,9 +1,13 @@
 import React from 'react';
 import Header from '../components/Header';
+import HorizontalCard from '../components/HorizontalCard';
 
 function DoneRecipes() {
   return (
-    <div><Header /></div>
+    <div>
+      <Header />
+      <HorizontalCard />
+    </div>
   );
 }
 
