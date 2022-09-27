@@ -17,6 +17,7 @@ function RecomedationDetail() {
     try {
       const request = await fetch(URL);
       const response = await request.json();
+      console.log(URL);
 
       if (type === 'meal') {
         if (response.meals === null) {

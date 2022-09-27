@@ -98,7 +98,11 @@ function BodyDetail({ imgUrl, nameRecipie, video }) {
 BodyDetail.propTypes = {
   imgUrl: PropTypes.string.isRequired,
   nameRecipie: PropTypes.string.isRequired,
-  video: PropTypes.string.isRequired,
+  video: PropTypes.string,
+};
+
+BodyDetail.defaultProps = {
+  video: null,
 };
 
 export default BodyDetail;
