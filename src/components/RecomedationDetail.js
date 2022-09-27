@@ -13,6 +13,13 @@ function RecomedationDetail() {
 
   async function apiFetchRecomedations(type, filter, paramFilter) {
     const URL = searchFoodApiRequest(type, filter, paramFilter);
+    // let URL = '';
+
+    // if (type === 'drinks') {
+    //   URL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+    // } else {
+    //   URL = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
+    // }
 
     try {
       const request = await fetch(URL);
@@ -40,9 +47,9 @@ function RecomedationDetail() {
   useEffect(() => {
     if (OK_FETCH) {
       if (arrayPath[1] === 'drinks') {
-        apiFetchRecomedations('cocktail', 'name', '');
-      } else {
         apiFetchRecomedations('meal', 'name', '');
+      } else {
+        apiFetchRecomedations('cocktail', 'name', '');
       }
     }
     OK_FETCH = false;
