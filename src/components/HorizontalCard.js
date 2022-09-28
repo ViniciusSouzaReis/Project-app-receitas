@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
+import blackHeart from '../images/blackHeartIcon.svg';
 
 const copy = require('clipboard-copy');
 
@@ -78,6 +79,15 @@ function HorizontalCard({ filter }) {
               ))}
             </ul>
 
+          )}
+          {(pathname === '/favorite-recipes') && (
+            <img
+              role="presentation"
+              data-testid={ `${index}-horizontal-favorite-btn` }
+              src={ blackHeart }
+              alt="share"
+              onClick={ () => handleShare(type, id) }
+            />
           )}
           {(clippedText) && (
             <p>Link copied!</p>
