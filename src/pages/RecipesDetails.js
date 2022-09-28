@@ -5,11 +5,16 @@ import RecipesContext from '../Api-Context/contexts/RecipesContext';
 import BodyDetail from '../components/BodyDetail';
 import RecomedationDetail from '../components/RecomedationDetail';
 import shareIcon from '../images/shareIcon.svg';
-import { readInProgressRecipes,
-  addInProgressRecipes } from '../services/inProgressRecipesLocalStorage';
+import {
+  readInProgressRecipes,
+  addInProgressRecipes,
+  saveInProgressRecipes } from '../services/inProgressRecipesLocalStorage';
 // import { addInProgressRecipes } from '../services/inProgressRecipesLocalStorage';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 let OK_FETCH = true;
+let IS_FAVE = false;
 const IN_PROGRESS_RECIPES = 'inProgressRecipes';
 const DONE_RECIPES = 'doneRecipes';
 const copy = require('clipboard-copy');
@@ -22,10 +27,13 @@ function RecipesDetails() {
   const [existInProgress, setExistInProgress] = useState(false);
   const [existDoneRecipe, setExistDoneRecipe] = useState(false);
   const [clippedText, setClippedText] = useState(false);
+  const [isFave, setFaveSwitch] = useState(IS_FAVE);
   const arrayPath = pathname.split('/');
   // console.log(arrayPath[1]);
   // console.log(apiReturn);
   // console.log(OK_FETCH);
+  console.log(blackHeartIcon);
+  console.log(whiteHeartIcon);
 
   useEffect(() => {
     if (!JSON.parse(localStorage.getItem(IN_PROGRESS_RECIPES))) {
@@ -37,6 +45,21 @@ function RecipesDetails() {
     setInProgress(readInProgressRecipes(IN_PROGRESS_RECIPES));
     setDoneStorage(readInProgressRecipes(DONE_RECIPES));
   }, []);
+
+  useEffect(() => {
+    // tentar mudar a cor do coraçãozinho
+    if (!JSON.parse(localStorage.getItem('favoriteRecipes'))) {
+      localStorage.setItem('favoriteRecipes', JSON.stringify([]));
+    }
+    const faveList = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    if (apiReturn[0] !== undefined) {
+      if (arrayPath[1] === 'meals') {
+        setFaveSwitch(faveList.some((recipe) => recipe.id === apiReturn[0].idMeal));
+      } else {
+        setFaveSwitch(faveList.some((recipe) => recipe.id === apiReturn[0].idDrink));
+      }
+    }
+  }, [apiReturn]);
 
   useEffect(() => {
     const compareRecipes = () => {
@@ -108,10 +131,21 @@ function RecipesDetails() {
         image: apiReturn[0].strDrinkThumb,
       };
     }
-    // const stored = localStorage.getItem('favoriteRecipes');
-    addInProgressRecipes('favoriteRecipes', newFave);
-    /* if (stored) {
-    } */
+
+    let faveList = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    // console.log(faveList);
+    IS_FAVE = faveList.some((recipe) => recipe.id === newFave.id);
+    // setFaveSwitch(true);
+    // console.log('favorito?:', IS_FAVE);
+    if (IS_FAVE === false) {
+      addInProgressRecipes('favoriteRecipes', newFave);
+      setFaveSwitch(true);
+    } else {
+      faveList = faveList.filter((recipe) => recipe.id !== newFave.id);
+      saveInProgressRecipes('favoriteRecipes', faveList);
+      setFaveSwitch(false);
+    }
+    // setFaveSwitch(faveList.some((recipe) => recipe.id === newFave.id));
   };
 
   const handleShare = async () => {
@@ -162,13 +196,20 @@ function RecipesDetails() {
           alt="share"
         />
       </button>
-      <button
-        type="button"
+      <img
+        src={ isFave ? blackHeartIcon : whiteHeartIcon }
+        alt="favoriteOrNot"
+        role="presentation"
         data-testid="favorite-btn"
         onClick={ favoriteButton }
+      />
+      {/* <button
+        type="button"
+
+        onClick={ }
       >
         Favorites
-      </button>
+      </button> */}
       <RecomedationDetail />
     </div>
   );
