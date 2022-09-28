@@ -12,7 +12,6 @@ import {
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 
-
 let OK_FETCH = true;
 let IS_FAVE = false;
 const IN_PROGRESS_RECIPES = 'inProgressRecipes';
@@ -63,7 +62,7 @@ function RecipesDetails() {
         setFaveSwitch(faveList.some((recipe) => recipe.id === apiReturn[0].idDrink));
       }
     }
-  }, [apiReturn]);
+  }, [apiReturn, arrayPath]);
 
   useEffect(() => {
     const compareRecipes = () => {
