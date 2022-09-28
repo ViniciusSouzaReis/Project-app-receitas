@@ -13,7 +13,7 @@ function Recipes() {
   useEffect(() => {
     if (pathname === '/meals') { apiFetch('meal'); }
     if (pathname === '/drinks') { apiFetch('cocktail'); }
-  }, [pathname]);
+  }, [pathname, apiFetch]);
 
   const maxCards = 12;
 
