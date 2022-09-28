@@ -1,13 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-// import { CopyToClipboard } from 'react-copy-to-clipboard';
 import RecipesContext from '../Api-Context/contexts/RecipesContext';
 import BodyDetail from '../components/BodyDetail';
 import RecomedationDetail from '../components/RecomedationDetail';
 import shareIcon from '../images/shareIcon.svg';
 import { readInProgressRecipes,
   addInProgressRecipes } from '../services/inProgressRecipesLocalStorage';
-// import { addInProgressRecipes } from '../services/inProgressRecipesLocalStorage';
 
 let OK_FETCH = true;
 const IN_PROGRESS_RECIPES = 'inProgressRecipes';
@@ -23,13 +21,17 @@ function RecipesDetails() {
   const [existDoneRecipe, setExistDoneRecipe] = useState(false);
   const [clippedText, setClippedText] = useState(false);
   const arrayPath = pathname.split('/');
+
   // console.log(arrayPath[1]);
   // console.log(apiReturn);
   // console.log(OK_FETCH);
 
   useEffect(() => {
     if (!JSON.parse(localStorage.getItem(IN_PROGRESS_RECIPES))) {
-      localStorage.setItem(IN_PROGRESS_RECIPES, JSON.stringify({}));
+      localStorage.setItem(IN_PROGRESS_RECIPES, JSON.stringify({
+        drinks: {},
+        meals: {},
+      }));
     }
     if (!JSON.parse(localStorage.getItem(DONE_RECIPES))) {
       localStorage.setItem(DONE_RECIPES, JSON.stringify([]));
@@ -77,8 +79,6 @@ function RecipesDetails() {
   useEffect(() => () => { OK_FETCH = true; }, []);
 
   const handleClick = () => {
-    // console.log(pathname);
-    // addInProgressRecipes(IN_PROGRESS_RECIPES, apiReturn[0]);
     push(`${pathname}/in-progress`);
   };
 

@@ -35,7 +35,7 @@
 //   simulateRequest(SUCCESS_STATUS)(resolve);
 // });
 
-// const IN_PROGRESS_RECIPES = 'inProgressRecipes';
+const IN_PROGRESS_RECIPES = 'inProgressRecipes';
 const TIMEOUT = 500;
 const SUCCESS_STATUS = 'OK';
 
@@ -63,6 +63,29 @@ export const addInProgressRecipes = (key, value) => new Promise((resolve) => {
   if (value) {
     const prevValue = readInProgressRecipes(key);
     saveInProgressRecipes(key, [...prevValue, value]);
+  }
+  simulateRequest(SUCCESS_STATUS)(resolve);
+});
+
+export const addObjectInProgress = (id, value, type) => new Promise((resolve) => {
+  if (type === 'meals') {
+    const prevValue = JSON.parse(localStorage.getItem(IN_PROGRESS_RECIPES));
+    saveInProgressRecipes(IN_PROGRESS_RECIPES, {
+      ...prevValue,
+      meals: {
+        ...prevValue.meals,
+        [id]: value,
+      },
+    });
+  } else {
+    const prevValue = JSON.parse(localStorage.getItem(IN_PROGRESS_RECIPES));
+    saveInProgressRecipes(IN_PROGRESS_RECIPES, {
+      ...prevValue,
+      drinks: {
+        ...prevValue.drinks,
+        [id]: value,
+      },
+    });
   }
   simulateRequest(SUCCESS_STATUS)(resolve);
 });
