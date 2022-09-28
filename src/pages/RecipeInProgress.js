@@ -1,6 +1,5 @@
 import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import shareIcon from '../images/shareIcon.svg';
 import InProgressDetails from '../components/InProgressDetails';
 import RecipesContext from '../Api-Context/contexts/RecipesContext';
 
@@ -38,30 +37,6 @@ function RecipeInProgress() {
             />
           )
       )}
-      <button
-        type="button"
-        data-testid="share-btn"
-        // onClick={ handleShare }
-      >
-        <img
-          src={ shareIcon }
-          alt="share"
-        />
-      </button>
-      <button
-        type="button"
-        data-testid="favorite-btn"
-        // onClick={ favoriteButton }
-      >
-        Favorites
-      </button>
-      <button
-        type="button"
-        data-testid="finish-recipe-btn"
-        // onClick={ favoriteButton }
-      >
-        Finish Recipe
-      </button>
     </div>
   );
 }

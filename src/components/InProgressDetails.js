@@ -1,13 +1,16 @@
 import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import shareIcon from '../images/shareIcon.svg';
 import RecipesContext from '../Api-Context/contexts/RecipesContext';
 import '../index.css';
 
 function InProgressDetails({ imgUrl, nameRecipie }) {
   const { apiReturn } = useContext(RecipesContext);
-  const { location: { pathname } } = useHistory();
+  const { push, location: { pathname } } = useHistory();
   const [newClass, setNewClass] = useState('');
+  const [indexToCompare, setIndexToCompare] = useState(0);
+  const [renderCheck, setRenderCheck] = useState(true);
   const arrayPath = pathname.split('/');
   let arrayIgredients = [];
   let arrayMesures = [];
@@ -22,7 +25,16 @@ function InProgressDetails({ imgUrl, nameRecipie }) {
   }
 
   const handleClick = () => {
+    if (indexToCompare < arrayIgredients.length - 1) {
+      setIndexToCompare((prev) => prev + 1);
+    } else {
+      setRenderCheck(false);
+    }
     setNewClass('checkboxDecoration');
+  };
+
+  const handleFinishButton = () => {
+    push('/done-recipes');
   };
 
   return (
@@ -93,6 +105,30 @@ function InProgressDetails({ imgUrl, nameRecipie }) {
         >
           {apiReturn[0].strInstructions}
         </p>
+        <button
+          type="button"
+          data-testid="share-btn"
+        >
+          <img
+            src={ shareIcon }
+            alt="share"
+          />
+        </button>
+        <button
+          type="button"
+          data-testid="favorite-btn"
+        // onClick={ favoriteButton }
+        >
+          Favorites
+        </button>
+        <button
+          type="button"
+          data-testid="finish-recipe-btn"
+          onClick={ handleFinishButton }
+          disabled={ renderCheck }
+        >
+          Finish Recipe
+        </button>
       </div>
     </div>
   );
