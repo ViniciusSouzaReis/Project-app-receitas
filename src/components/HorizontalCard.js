@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { saveProductCard } from '../services/userLocalStorage';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeart from '../images/blackHeartIcon.svg';
 
@@ -11,6 +12,7 @@ function HorizontalCard({ filter }) {
   const [objKey, setObjKey] = useState('');
   const [recipesArray, setRecipesArray] = useState([]);
   const [clippedText, setClippedText] = useState(false);
+  const [checkFavorite, setCheckFavorite] = useState(false);
 
   useEffect(() => {
     if (pathname === '/done-recipes') {
@@ -30,11 +32,17 @@ function HorizontalCard({ filter }) {
         setRecipesArray(recipes);
       }
     }
-  }, [objKey, filter]);
+  }, [objKey, filter, checkFavorite]);
 
   const handleShare = async (type, id) => {
     copy(`http://localhost:3000/${type}s/${id}`);
     setClippedText(!clippedText);
+  };
+
+  const handleRemoveFavorite = async (idRemove) => {
+    const newFavorites = recipesArray.filter(({ id }) => id !== idRemove);
+    saveProductCard('favoriteRecipes', newFavorites);
+    setCheckFavorite(!checkFavorite);
   };
 
   return (
@@ -78,7 +86,6 @@ function HorizontalCard({ filter }) {
                 </li>
               ))}
             </ul>
-
           )}
           {(pathname === '/favorite-recipes') && (
             <img
@@ -86,7 +93,7 @@ function HorizontalCard({ filter }) {
               data-testid={ `${index}-horizontal-favorite-btn` }
               src={ blackHeart }
               alt="share"
-              onClick={ () => handleShare(type, id) }
+              onClick={ () => handleRemoveFavorite(id) }
             />
           )}
           {(clippedText) && (
