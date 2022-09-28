@@ -1,12 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from '../components/Header';
 import HorizontalCard from '../components/HorizontalCard';
 
 function DoneRecipes() {
+  const [filter, setFilter] = useState('');
   const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
-  const handleClick = () => {
-    console.log('oi');
+  const handleClick = ({ target }) => {
+    if (target.innerText === 'Meals') {
+      setFilter('meal');
+    } else if (target.innerText === 'Drinks') {
+      setFilter('drink');
+    } else {
+      setFilter('');
+    }
   };
+
   return (
     <div>
       <Header />
@@ -33,7 +41,7 @@ function DoneRecipes() {
           Drinks
         </button>
       </div>
-      {doneRecipes && <HorizontalCard />}
+      {doneRecipes && <HorizontalCard filter={ filter } />}
     </div>
   );
 }
