@@ -9,11 +9,18 @@ function Profile() {
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('user'));
+
     if (user) { setEmail(user.email); }
   }, []);
 
   const logout = () => {
-    localStorage.clear();
+    // localStorage.clear();
+    localStorage.removeItem('user');
+    localStorage.removeItem('mealsToken');
+    localStorage.removeItem('drinksToken');
+    localStorage.removeItem('doneRecipes');
+    localStorage.removeItem('favoriteRecipes');
+    localStorage.removeItem('inProgressRecipes');
     push('/');
   };
 

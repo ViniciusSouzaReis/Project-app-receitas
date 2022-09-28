@@ -52,11 +52,15 @@ CardRecipies.propTypes = {
   nameRecipie: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
-  width: PropTypes.string.isRequired,
+  width: PropTypes.string,
   idTeste: PropTypes.shape({
     idCard: PropTypes.string.isRequired,
     idTitle: PropTypes.string.isRequired,
   }).isRequired,
+};
+
+CardRecipies.defaultProps = {
+  width: '18rem',
 };
 
 export default CardRecipies;

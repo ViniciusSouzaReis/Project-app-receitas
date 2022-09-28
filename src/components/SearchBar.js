@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import RecipesContext from '../Api-Context/contexts/RecipesContext';
 
 let OK_REDIRECT = false;
+let BTN_FILTER = false;
 
 function SearchBar() {
   const [radioButton, setRadioButton] = useState('');
@@ -32,6 +33,7 @@ function SearchBar() {
     } else if (pathname === '/drinks') {
       foodApiRequest('cocktail');
     }
+    BTN_FILTER = true;
     OK_REDIRECT = true;
   };
 
@@ -44,12 +46,13 @@ function SearchBar() {
       push(`${pathname}/${target[id]}`);
       OK_REDIRECT = false;
     }
-    if (!apiReturn[0] /* === undefined */) {
+    if (!apiReturn[0] && BTN_FILTER) {
       // apenas mudando algo
       global.alert('Sorry, we haven\'t found any recipes for these filters.');
     }
+    BTN_FILTER = false;
   }, [apiReturn, pathname, push]);
-  console.log(apiReturn);
+  // console.log(apiReturn);
 
   return (
     <div>
