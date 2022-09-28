@@ -1,13 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Header from '../components/Header';
 import HorizontalCard from '../components/HorizontalCard';
 
 function FavoriteRecipes() {
-  const [filter, setFilter] = useState('');
   const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
-  const handleClick = ({ target }) => {
-    console.log(target);
-    // setFilter();
+  const handleClick = () => {
+    console.log('oi');
   };
   return (
     <div>
