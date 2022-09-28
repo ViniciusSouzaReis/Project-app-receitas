@@ -8,35 +8,33 @@ const SEARCH_BTN = 'search-top-btn';
 const SEARCH_INPUT = 'search-input';
 const FILTER_BTN = 'exec-search-btn';
 
+function login() {
+  const emailInput = screen.getByTestId('email-input');
+  const passwordInput = screen.getByTestId('password-input');
+  const btn = screen.getByTestId('login-submit-btn');
+
+  userEvent.click(emailInput);
+  userEvent.type(emailInput, 'xablau@xablau.com');
+
+  userEvent.click(passwordInput);
+  userEvent.type(passwordInput, '1234567');
+
+  userEvent.click(btn);
+}
+
+function logout() {
+  const btnPerfil = screen.getByTestId(PROFILE_BTN);
+  userEvent.click(btnPerfil);
+
+  const btnLogout = screen.getByTestId('profile-logout-btn');
+  userEvent.click(btnLogout);
+}
+
 describe('Teste de cobertura geral', () => {
-  test('typing tests', () => {
+  test('typing tests', async () => {
     render(<App />);
 
-    function login() {
-      const emailInput = screen.getByTestId('email-input');
-      const passwordInput = screen.getByTestId('password-input');
-      const btn = screen.getByTestId('login-submit-btn');
-
-      userEvent.click(emailInput);
-      userEvent.type(emailInput, 'xablau@xablau.com');
-
-      userEvent.click(passwordInput);
-      userEvent.type(passwordInput, '1234567');
-
-      userEvent.click(btn);
-    }
-
-    function logout() {
-      const btnPerfil = screen.getByTestId(PROFILE_BTN);
-      userEvent.click(btnPerfil);
-
-      const btnLogout = screen.getByTestId('profile-logout-btn');
-      userEvent.click(btnLogout);
-    }
-
     login();
-    // login
-    // const teste = screen.getByAltText(/Pick through your lentils/);
 
     // const btnMeals = screen.getByTestId('meals-bottom-btn');
 
@@ -87,19 +85,7 @@ describe('Teste de cobertura geral', () => {
     logout();
     login();
 
-    const btnSearch2 = screen.getByTestId(SEARCH_BTN);
-    userEvent.click(btnSearch2);
-
-    const searchInput2 = screen.getByTestId(SEARCH_INPUT);
-    userEvent.type(searchInput2, 'Corba');
-
-    const radInputName2 = screen.getByTestId('name-search-radio');
-    userEvent.click(radInputName2);
-
-    const btnFilter2 = screen.getByTestId(FILTER_BTN);
-    userEvent.click(btnFilter2);
-
-    // header
+    //
 
     const btnPerfil = screen.getByTestId(PROFILE_BTN);
     userEvent.click(btnPerfil);
@@ -113,14 +99,26 @@ describe('Teste de cobertura geral', () => {
     const btnFavorite = screen.getByTestId('profile-favorite-btn');
     userEvent.click(btnFavorite);
 
-    // profile
+    //
 
-    // userEvent.click(emailInput);
-    // userEvent.type(emailInput, 'xablau@xablau.com');
+    logout();
+    login();
 
-    // userEvent.click(passwordInput);
-    // userEvent.type(passwordInput, '1234567');
+    const btnSearch2 = screen.getByTestId(SEARCH_BTN);
+    userEvent.click(btnSearch2);
 
-    // userEvent.click(btn);
+    const searchInput2 = screen.getByTestId(SEARCH_INPUT);
+    userEvent.type(searchInput2, 'Corba');
+
+    const radInputName2 = screen.getByTestId('name-search-radio');
+    userEvent.click(radInputName2);
+
+    const btnFilter2 = await screen.findByTestId(FILTER_BTN);
+    userEvent.click(btnFilter2);
+
+    const teste = await screen.findByText(/Pick through your lentils/);
+    expect(teste).toBeInTheDocument();
+
+    // header
   });
 });
