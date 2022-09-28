@@ -16,3 +16,7 @@ footer {
   position: fixed;
   bottom: 0px;
 }
+
+.checkboxDecoration {
+  text-decoration: line-through;
+}
