@@ -14,6 +14,80 @@ Object.assign(navigator, {
   },
 });
 
+const localStorageMockFav = [
+  { alcoholicOrNot: 'Optional alcohol',
+    category: 'Ordinary Drink',
+    id: '15997',
+    image: 'https://www.thecocktaildb.com/images/media/drink/vyxwut1468875960.jpg',
+    name: 'GG',
+    nationality: '',
+    type: 'drink',
+  }, {
+    alcoholicOrNot: '',
+    category: 'Side',
+    id: '52977',
+    image: 'https://www.themealdb.com/images/media/meals/58oia61564916529.jpg',
+    name: 'Corba',
+    nationality: 'Turkish',
+    type: 'meal',
+  }, {
+    alcoholicOrNot: '',
+    category: 'Side',
+    id: '53060',
+    image: 'https://www.themealdb.com/images/media/meals/tkxquw1628771028.jpg',
+    name: 'Burek',
+    nationality: 'Croatian',
+    type: 'meal',
+  },
+];
+
+const localStorageMockDone = [{
+  alcoholicOrNot: '',
+  category: 'Vegetarian',
+  doneDate: '23/06/2020',
+  id: '52771',
+  image: 'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg',
+  name: 'Spicy Arrabiata Penne',
+  nationality: 'Italian',
+  tags: ['Pasta', 'Curry'],
+  type: 'meal',
+}, {
+  alcoholicOrNot: 'Alcoholic',
+  category: 'Cocktail',
+  doneDate: '23/06/2020',
+  id: '178319',
+  image: 'https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg',
+  name: 'Aquamarine',
+  nationality: '',
+  tags: [],
+  type: 'drink',
+}, {
+  alcoholicOrNot: '',
+  category: 'Side',
+  doneDate: '29/09/2022',
+  id: '53060',
+  image: 'https://www.themealdb.com/images/media/meals/tkxquw1628771028.jpg',
+  name: 'Burek',
+  nationality: 'Croatian',
+  tags: ['Streetfood', 'Onthego'],
+  type: 'meal',
+}];
+
+const localStorageMockInProgress = {
+  drinks: { 15997: [] },
+  meals: { 52977: [] },
+};
+
+beforeEach(() => {
+  localStorage.setItem('doneRecipes', JSON.stringify(localStorageMockDone));
+  localStorage.setItem('favoriteRecipes', JSON.stringify(localStorageMockFav));
+  localStorage.setItem('inProgressRecipes', JSON.stringify(localStorageMockInProgress));
+});
+
+afterEach(() => {
+  localStorage.clear();
+});
+
 const PROFILE_BTN = 'profile-top-btn';
 const FAVORITE_BNT = 'favorite-btn';
 // const SEARCH_BTN = 'search-top-btn';
@@ -102,6 +176,7 @@ describe('Teste de cobertura geral', () => {
 
     // handleShare();
 
-    history.push('/');
+    // history.push('/');
   });
+  test('typing tests', async () => {});
 });
