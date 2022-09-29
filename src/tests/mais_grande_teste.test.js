@@ -176,7 +176,7 @@ describe('Teste de cobertura geral', () => {
 
     // handleShare();
 
-    // history.push('/');
+    history.push('/');
   });
   test('typing tests', async () => {});
 });
