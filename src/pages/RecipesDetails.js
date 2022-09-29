@@ -65,7 +65,7 @@ function RecipesDetails() {
   useEffect(() => {
     const compareRecipes = () => {
       if (doneStorage.length > 0) {
-        // setExistDoneRecipe(doneStorage.some((element) => element.id === arrayPath[2]));
+        setExistDoneRecipe(doneStorage.some((element) => element.id === arrayPath[2]));
       }
     };
     const compareInProgress = () => {
