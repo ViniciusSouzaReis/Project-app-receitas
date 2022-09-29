@@ -4,6 +4,16 @@ import userEvent from '@testing-library/user-event';
 import App from '../App';
 import renderWithRouter from '../services/renderWithRouter';
 
+// const copy = require('clipboard-copy');
+// document.execCommand = jest.fn('copy').mockResolvedValue('');
+document.execCommand = jest.fn().mockResolvedValue('');
+
+Object.assign(navigator, {
+  clipboard: {
+    writeText: () => {},
+  },
+});
+
 const PROFILE_BTN = 'profile-top-btn';
 const FAVORITE_BNT = 'favorite-btn';
 // const SEARCH_BTN = 'search-top-btn';
@@ -54,9 +64,6 @@ describe('Teste de cobertura geral', () => {
     userEvent.click(btnFavorite2);
     userEvent.click(btnFavorite2);
 
-    // const btnShare2 = await screen.findByTestId('share-btn');
-    // userEvent.click(btnShare2);
-
     async function voltaMenu() {
       const btnStartRecipie = await screen.findByTestId('start-recipe-btn');
       userEvent.click(btnStartRecipie);
@@ -81,6 +88,19 @@ describe('Teste de cobertura geral', () => {
     userEvent.click(btnFavorite3);
     userEvent.click(btnFavorite3);
     userEvent.click(btnFavorite3);
+
+    // global.copy = jest.fn().mockResolvedValue('');
+
+    // const btnShare2 = await screen.findByTestId('share-btn');
+    // userEvent.click(btnShare2);
+
+    // const mock = jest.fn(copy);
+
+    const btnShare2 = screen.getByTestId('share-btn');
+    jest.spyOn(navigator.clipboard, 'writeText');
+    userEvent.click(btnShare2);
+
+    // handleShare();
 
     history.push('/');
   });
