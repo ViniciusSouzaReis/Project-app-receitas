@@ -6,13 +6,7 @@ function DoneRecipes() {
   const [filter, setFilter] = useState('');
   const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
   const handleClick = ({ target }) => {
-    if (target.innerText === 'Meals') {
-      setFilter('meal');
-    } else if (target.innerText === 'Drinks') {
-      setFilter('drink');
-    } else {
-      setFilter('');
-    }
+    setFilter(target.name);
   };
 
   return (
@@ -23,6 +17,7 @@ function DoneRecipes() {
           type="button"
           onClick={ handleClick }
           data-testid="filter-by-all-btn"
+          name=""
         >
           All
         </button>
@@ -30,6 +25,7 @@ function DoneRecipes() {
           type="button"
           onClick={ handleClick }
           data-testid="filter-by-meal-btn"
+          name="meal"
         >
           Meals
         </button>
@@ -37,6 +33,7 @@ function DoneRecipes() {
           type="button"
           onClick={ handleClick }
           data-testid="filter-by-drink-btn"
+          name="drink"
         >
           Drinks
         </button>

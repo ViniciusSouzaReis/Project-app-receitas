@@ -5,18 +5,19 @@ import { createMemoryHistory } from 'history';
 import { render } from '@testing-library/react';
 import RecipesContext from '../../Api-Context/contexts/RecipesContext';
 
-const customRender = (ui, { providerProps, ...renderOptions }) => {
+const customRender = (ui, { providerProps, ...renderOptions }, pathname) => {
   const history = createMemoryHistory();
+  history.location.pathname = pathname;
   return (
-    render(
-      <Router history={ history }>
-        <RecipesContext.Provider { ...providerProps }>
+    { ...render(
+      <RecipesContext.Provider { ...providerProps }>
+        <Router history={ history }>
           {ui}
-        </RecipesContext.Provider>
-      </Router>,
-      renderOptions,
-      history,
-    )
+        </Router>
+      </RecipesContext.Provider>,
+    ),
+    renderOptions,
+    history }
   );
 };
 
