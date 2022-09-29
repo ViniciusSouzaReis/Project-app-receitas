@@ -145,6 +145,15 @@ describe('Teste de cobertura geral', () => {
       const btnFavorite = await screen.findByTestId(FAVORITE_BNT);
       userEvent.click(btnFavorite);
 
+      const checkbox = screen.getAllByLabelText(/Check Ingredients/i);
+      console.log(checkbox);
+      checkbox.map((e) => (
+        userEvent.click(e)
+      ));
+
+      const btnFinish = screen.getByTestId('finish-recipe-btn');
+      userEvent.click(btnFinish);
+
       const btnProfile = await screen.findByTestId(PROFILE_BTN);
       userEvent.click(btnProfile);
     }

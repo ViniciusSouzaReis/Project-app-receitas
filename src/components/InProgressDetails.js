@@ -141,6 +141,7 @@ function InProgressDetails({ imgUrl, nameRecipie }) {
                 data-testid={ `${index}-ingredient-step` }
                 key={ item }
               >
+                Check Ingredients
                 <input
                   type="checkbox"
                   id={ `id${index}` }
