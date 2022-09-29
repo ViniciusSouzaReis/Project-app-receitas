@@ -1,16 +1,27 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
 import RecipesContext from '../Api-Context/contexts/RecipesContext';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
+import {
+  addInProgressRecipes,
+  saveInProgressRecipes } from '../services/inProgressRecipesLocalStorage';
 import '../index.css';
+
+const copy = require('clipboard-copy');
+
+let IS_FAVE = false;
 
 function InProgressDetails({ imgUrl, nameRecipie }) {
   const { apiReturn } = useContext(RecipesContext);
   const { push, location: { pathname } } = useHistory();
+  const [clippedText, setClippedText] = useState(false);
   const [newClass, setNewClass] = useState('');
   const [indexToCompare, setIndexToCompare] = useState(0);
   const [renderCheck, setRenderCheck] = useState(true);
+  const [isFave, setFaveSwitch] = useState(IS_FAVE);
   const arrayPath = pathname.split('/');
   let arrayIgredients = [];
   let arrayMesures = [];
@@ -23,6 +34,20 @@ function InProgressDetails({ imgUrl, nameRecipie }) {
       break;
     }
   }
+
+  useEffect(() => {
+    if (!JSON.parse(localStorage.getItem('favoriteRecipes'))) {
+      localStorage.setItem('favoriteRecipes', JSON.stringify([]));
+    }
+    const faveList = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    if (apiReturn[0] !== undefined) {
+      if (arrayPath[1] === 'meals') {
+        setFaveSwitch(faveList.some((recipe) => recipe.id === apiReturn[0].idMeal));
+      } else {
+        setFaveSwitch(faveList.some((recipe) => recipe.id === apiReturn[0].idDrink));
+      }
+    }
+  }, [apiReturn, arrayPath]);
 
   const handleClick = () => {
     if (indexToCompare < arrayIgredients.length - 1) {
@@ -37,8 +62,46 @@ function InProgressDetails({ imgUrl, nameRecipie }) {
     push('/done-recipes');
   };
 
+  const handleShare = async () => {
+    copy(`http://localhost:3000/${arrayPath[1]}/${arrayPath[2]}`);
+    setClippedText(!clippedText);
+  };
+
   const favoriteButton = () => {
-    push('/favorite-recipes');
+    let newFave = {};
+    if (arrayPath[1] === 'meals') {
+      newFave = {
+        id: apiReturn[0].idMeal,
+        type: 'meal',
+        nationality: apiReturn[0].strArea,
+        category: apiReturn[0].strCategory ? apiReturn[0].strCategory : '',
+        alcoholicOrNot: '',
+        name: apiReturn[0].strMeal,
+        image: apiReturn[0].strMealThumb,
+      };
+    } else {
+      newFave = {
+        id: apiReturn[0].idDrink,
+        type: 'drink',
+        nationality: apiReturn[0].strArea ? apiReturn[0].strArea : '',
+        category: apiReturn[0].strCategory ? apiReturn[0].strCategory : '',
+        alcoholicOrNot: apiReturn[0].strAlcoholic ? apiReturn[0].strAlcoholic : '',
+        name: apiReturn[0].strDrink,
+        image: apiReturn[0].strDrinkThumb,
+      };
+    }
+
+    let faveList = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    IS_FAVE = faveList.some((recipe) => recipe.id === newFave.id);
+
+    if (IS_FAVE === false) {
+      addInProgressRecipes('favoriteRecipes', newFave);
+      setFaveSwitch(true);
+    } else {
+      faveList = faveList.filter((recipe) => recipe.id !== newFave.id);
+      saveInProgressRecipes('favoriteRecipes', faveList);
+      setFaveSwitch(false);
+    }
   };
 
   return (
@@ -109,22 +172,33 @@ function InProgressDetails({ imgUrl, nameRecipie }) {
         >
           {apiReturn[0].strInstructions}
         </p>
+        {(clippedText) && (
+          <p>Link copied!</p>
+        )}
         <button
           type="button"
           data-testid="share-btn"
+          onClick={ handleShare }
         >
           <img
             src={ shareIcon }
             alt="share"
           />
         </button>
-        <button
+        {/* <button
           type="button"
           data-testid="favorite-btn"
           onClick={ favoriteButton }
         >
           Favorites
-        </button>
+        </button> */}
+        <img
+          src={ isFave ? blackHeartIcon : whiteHeartIcon }
+          alt="favoriteOrNot"
+          role="presentation"
+          data-testid="favorite-btn"
+          onClick={ favoriteButton }
+        />
         <button
           type="button"
           data-testid="finish-recipe-btn"
