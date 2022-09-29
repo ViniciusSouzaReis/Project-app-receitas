@@ -107,9 +107,9 @@ function RecipesDetails() {
   };
 
   const favoriteButton = () => {
-    if (!JSON.parse(localStorage.getItem('favoriteRecipes'))) {
-      localStorage.setItem('favoriteRecipes', JSON.stringify([]));
-    }
+    // if (!JSON.parse(localStorage.getItem('favoriteRecipes'))) {
+    //   localStorage.setItem('favoriteRecipes', JSON.stringify([]));
+    // }
     let newFave = {};
     if (arrayPath[1] === 'meals') {
       newFave = {
