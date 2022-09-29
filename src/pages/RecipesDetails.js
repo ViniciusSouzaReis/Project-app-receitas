@@ -32,8 +32,6 @@ function RecipesDetails() {
   // console.log(arrayPath[1]);
   // console.log(apiReturn);
   // console.log(OK_FETCH);
-  console.log(blackHeartIcon);
-  console.log(whiteHeartIcon);
 
   useEffect(() => {
     if (!JSON.parse(localStorage.getItem(IN_PROGRESS_RECIPES))) {
@@ -67,7 +65,7 @@ function RecipesDetails() {
   useEffect(() => {
     const compareRecipes = () => {
       if (doneStorage.length > 0) {
-        setExistDoneRecipe(doneStorage.some((element) => element.id === arrayPath[2]));
+        // setExistDoneRecipe(doneStorage.some((element) => element.id === arrayPath[2]));
       }
     };
     const compareInProgress = () => {
