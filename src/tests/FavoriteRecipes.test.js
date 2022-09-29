@@ -1,5 +1,5 @@
 import React from 'react';
-import { screen, waitFor } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import customRender from './services/customRender';
 import FavoriteRecipes from '../pages/FavoriteRecipes';
@@ -48,11 +48,11 @@ describe('Teste da página de FavoriteRecipes', () => {
     };
     customRender(<FavoriteRecipes />, { providerProps }, pathname);
 
-    const corbaName = screen.getByText('Corba');
+    const corbaName = screen.getByText('Favorite Recipes');
     expect(corbaName).toBeInTheDocument();
   });
 
-  test('Se a página de Favoritos renderiza com o cards', async () => {
+  test('Se a página de Favoritos renderiza com os cards', async () => {
     const providerProps = {
       value: '',
     };
@@ -60,6 +60,12 @@ describe('Teste da página de FavoriteRecipes', () => {
 
     const corbaName = screen.getByText('Corba');
     expect(corbaName).toBeInTheDocument();
+
+    const burekName = screen.getByText('Burek');
+    expect(burekName).toBeInTheDocument();
+
+    const ggName = screen.getByText('GG');
+    expect(ggName).toBeInTheDocument();
   });
 
   test('Se a página de Favoritos renderiza com o filtros funcionais', async () => {
