@@ -53,7 +53,7 @@ function RecipesDetails() {
       localStorage.setItem('favoriteRecipes', JSON.stringify([]));
     }
     const faveList = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    if (apiReturn[0] !== undefined) {
+    if (apiReturn[0]) {
       if (arrayPath[1] === 'meals') {
         setFaveSwitch(faveList.some((recipe) => recipe.id === apiReturn[0].idMeal));
       } else {
@@ -114,7 +114,7 @@ function RecipesDetails() {
         id: apiReturn[0].idMeal,
         type: 'meal',
         nationality: apiReturn[0].strArea,
-        category: apiReturn[0].strCategory ? apiReturn[0].strCategory : '',
+        category: apiReturn[0].strCategory,
         alcoholicOrNot: '',
         name: apiReturn[0].strMeal,
         image: apiReturn[0].strMealThumb,
@@ -123,9 +123,9 @@ function RecipesDetails() {
       newFave = {
         id: apiReturn[0].idDrink,
         type: 'drink',
-        nationality: apiReturn[0].strArea ? apiReturn[0].strArea : '',
-        category: apiReturn[0].strCategory ? apiReturn[0].strCategory : '',
-        alcoholicOrNot: apiReturn[0].strAlcoholic ? apiReturn[0].strAlcoholic : '',
+        nationality: '',
+        category: apiReturn[0].strCategory,
+        alcoholicOrNot: apiReturn[0].strAlcoholic,
         name: apiReturn[0].strDrink,
         image: apiReturn[0].strDrinkThumb,
       };
@@ -179,7 +179,7 @@ function RecipesDetails() {
           id="btn-start-recipes"
           onClick={ handleClick }
         >
-          {(existInProgress) ? ('Continue Recipe') : ('Start Recipe')}
+          {!existInProgress ? 'Start Recipe' : 'Continue Recipe'}
         </button>
       )}
       {(clippedText) && (

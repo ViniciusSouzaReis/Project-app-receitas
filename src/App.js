@@ -11,7 +11,7 @@ import Login from './pages/Login';
 import Profile from './pages/Profile';
 import RecipeInProgress from './pages/RecipeInProgress';
 import Recipes from './pages/Recipes';
-import RecipesDetails from './pages/RecipesDetails';
+import RecipeDetails from './pages/RecipeDetails';
 import RecipesProvider from './Api-Context/providers/RecipiesProvider';
 
 function App() {
@@ -23,8 +23,8 @@ function App() {
             <Route exact path="/" component={ Login } />
             <Route exact path="/meals" component={ Recipes } />
             <Route exact path="/drinks" component={ Recipes } />
-            <Route exact path="/meals/:id" component={ RecipesDetails } />
-            <Route exact path="/drinks/:id" component={ RecipesDetails } />
+            <Route exact path="/meals/:id" component={ RecipeDetails } />
+            <Route exact path="/drinks/:id" component={ RecipeDetails } />
             <Route exact path="/meals/:id/in-progress" component={ RecipeInProgress } />
             <Route exact path="/drinks/:id/in-progress" component={ RecipeInProgress } />
             <Route exact path="/profile" component={ Profile } />

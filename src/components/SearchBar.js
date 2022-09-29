@@ -30,7 +30,7 @@ function SearchBar() {
   const handleClick = () => {
     if (pathname === '/meals') {
       foodApiRequest('meal');
-    } else if (pathname === '/drinks') {
+    } else {
       foodApiRequest('cocktail');
     }
     BTN_FILTER = true;

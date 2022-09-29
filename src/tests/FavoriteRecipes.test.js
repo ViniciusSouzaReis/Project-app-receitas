@@ -6,6 +6,14 @@ import FavoriteRecipes from '../pages/FavoriteRecipes';
 
 const pathname = '/favorite-recipes';
 
+document.execCommand = jest.fn().mockResolvedValue('');
+
+Object.assign(navigator, {
+  clipboard: {
+    writeText: () => {},
+  },
+});
+
 const localStorageMock = [
   { alcoholicOrNot: 'Optional alcohol',
     category: 'Ordinary Drink',
@@ -48,8 +56,8 @@ describe('Teste da página de FavoriteRecipes', () => {
     };
     customRender(<FavoriteRecipes />, { providerProps }, pathname);
 
-    const corbaName = screen.getByText('Favorite Recipes');
-    expect(corbaName).toBeInTheDocument();
+    const title = screen.getByText('Favorite Recipes');
+    expect(title).toBeInTheDocument();
   });
 
   test('Se a página de Favoritos renderiza com os cards', async () => {
@@ -95,5 +103,76 @@ describe('Teste da página de FavoriteRecipes', () => {
     userEvent.click(filterAllButton);
     const itensAllFilteredAgain = await screen.findAllByAltText('Recipe');
     expect(itensAllFilteredAgain.length).toBe(3);
+  });
+
+  test('Se a remove um favorito', async () => {
+    const providerProps = {
+      value: '',
+    };
+    customRender(<FavoriteRecipes />, { providerProps }, pathname);
+
+    const itensBeforeRemove = await screen.findAllByAltText('Recipe');
+    expect(itensBeforeRemove.length).toBe(3);
+
+    const buttonFavorite = screen.getByTestId('0-horizontal-favorite-btn');
+    userEvent.click(buttonFavorite);
+
+    const itensAfterRemove = await screen.findAllByAltText('Recipe');
+    expect(itensAfterRemove.length).toBe(2);
+  });
+
+  test('Se a redireciona ao clicar na imagem', async () => {
+    const providerProps = {
+      value: '',
+    };
+    const { history } = customRender(<FavoriteRecipes />, { providerProps }, pathname);
+
+    const path = history.location.pathname;
+    expect(path).toBe(pathname);
+
+    const itensBeforeRemove = await screen.findAllByAltText('Recipe');
+    expect(itensBeforeRemove.length).toBe(3);
+
+    userEvent.click(itensBeforeRemove[0]);
+
+    const nemPath = history.location.pathname;
+    expect(nemPath).toBe('/drinks/15997');
+  });
+
+  test('Se a redireciona ao clicar na imagem', async () => {
+    const providerProps = {
+      value: '',
+    };
+    const { history } = customRender(<FavoriteRecipes />, { providerProps }, pathname);
+
+    const path = history.location.pathname;
+    expect(path).toBe('/favorite-recipes');
+
+    const itensBeforeRemove = await screen.findAllByAltText('Recipe');
+    expect(itensBeforeRemove.length).toBe(3);
+
+    const itemName = await screen.getByText('GG');
+    expect(itemName.innerHTML).toBe('GG');
+    userEvent.click(itemName);
+
+    const nemPath = history.location.pathname;
+    expect(nemPath).toBe('/drinks/15997');
+  });
+
+  test('Se o botão share funciona', async () => {
+    const providerProps = {
+      value: '',
+    };
+
+    jest.spyOn(navigator.clipboard, 'writeText');
+
+    customRender(<FavoriteRecipes />, { providerProps }, pathname);
+
+    const shareButton = await screen.getAllByAltText('share');
+    expect(shareButton[0]).toHaveAttribute('src', 'shareIcon.svg');
+    userEvent.click(shareButton[0]);
+
+    const shareText = await screen.findAllByText('Link copied!');
+    expect(shareText[0]).toBeInTheDocument();
   });
 });

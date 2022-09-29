@@ -17,7 +17,7 @@ function HorizontalCard({ filter }) {
   useEffect(() => {
     if (pathname === '/done-recipes') {
       setObjKey('doneRecipes');
-    } else if (pathname === '/favorite-recipes') {
+    } else {
       setObjKey('favoriteRecipes');
     }
   }, [pathname]);
