@@ -37,6 +37,10 @@ function InProgressDetails({ imgUrl, nameRecipie }) {
     push('/done-recipes');
   };
 
+  const favoriteButton = () => {
+    push('/favorite-recipes');
+  };
+
   return (
     <div
       className="card"
@@ -117,7 +121,7 @@ function InProgressDetails({ imgUrl, nameRecipie }) {
         <button
           type="button"
           data-testid="favorite-btn"
-        // onClick={ favoriteButton }
+          onClick={ favoriteButton }
         >
           Favorites
         </button>

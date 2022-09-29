@@ -32,8 +32,6 @@ function RecipesDetails() {
   // console.log(arrayPath[1]);
   // console.log(apiReturn);
   // console.log(OK_FETCH);
-  console.log(blackHeartIcon);
-  console.log(whiteHeartIcon);
 
   useEffect(() => {
     if (!JSON.parse(localStorage.getItem(IN_PROGRESS_RECIPES))) {
@@ -107,9 +105,9 @@ function RecipesDetails() {
   };
 
   const favoriteButton = () => {
-    if (!JSON.parse(localStorage.getItem('favoriteRecipes'))) {
-      localStorage.setItem('favoriteRecipes', JSON.stringify([]));
-    }
+    // if (!JSON.parse(localStorage.getItem('favoriteRecipes'))) {
+    //   localStorage.setItem('favoriteRecipes', JSON.stringify([]));
+    // }
     let newFave = {};
     if (arrayPath[1] === 'meals') {
       newFave = {
