@@ -3,21 +3,19 @@ import { useHistory } from 'react-router-dom';
 import InProgressDetails from '../components/InProgressDetails';
 import RecipesContext from '../Api-Context/contexts/RecipesContext';
 
-let OK_FETCH = true;
 function RecipeInProgress() {
   const { apiReturn, apiFetch } = useContext(RecipesContext);
   const { location: { pathname } } = useHistory();
   const arrayPath = pathname.split('/');
 
   useEffect(() => {
-    if (OK_FETCH) {
-      if (arrayPath[1] === 'drinks') {
-        apiFetch('cocktail', 'detail', arrayPath[2]);
-      } else {
-        apiFetch('meal', 'detail', arrayPath[2]);
-      }
+    console.log(arrayPath[1]);
+    if (arrayPath[1] === 'meals') {
+      console.log(arrayPath[1]);
+      apiFetch('meal', 'detail', arrayPath[2]);
+    } else {
+      apiFetch('cocktail', 'detail', arrayPath[2]);
     }
-    OK_FETCH = false;
   }, [apiFetch, arrayPath]);
 
   return (

@@ -118,6 +118,7 @@ function login() {
 
 describe('Teste de cobertura geral', () => {
   test('typing tests', async () => {
+    jest.spyOn(navigator.clipboard, 'writeText');
     const { history } = renderWithRouter(<App />);
     // renderWithRouter(<App />);
 
@@ -144,12 +145,17 @@ describe('Teste de cobertura geral', () => {
 
       const btnFavorite = await screen.findByTestId(FAVORITE_BNT);
       userEvent.click(btnFavorite);
+      userEvent.click(btnFavorite);
+      userEvent.click(btnFavorite);
 
       const checkbox = screen.getAllByLabelText(/Check Ingredients/i);
       console.log(checkbox);
       checkbox.map((e) => (
         userEvent.click(e)
       ));
+
+      const getFavorite = screen.getByTestId('share-btn');
+      userEvent.click(getFavorite);
 
       const btnFinish = screen.getByTestId('finish-recipe-btn');
       userEvent.click(btnFinish);
@@ -172,6 +178,15 @@ describe('Teste de cobertura geral', () => {
     userEvent.click(btnFavorite3);
     userEvent.click(btnFavorite3);
 
+    const getFavorite1 = screen.getByTestId('share-btn');
+    userEvent.click(getFavorite1);
+
+    const btnStartRecipie2 = await screen.findByTestId('start-recipe-btn');
+    userEvent.click(btnStartRecipie2);
+
+    const btnFavorite4 = await screen.findByTestId(FAVORITE_BNT);
+    userEvent.click(btnFavorite4);
+    userEvent.click(btnFavorite4);
     // global.copy = jest.fn().mockResolvedValue('');
 
     // const btnShare2 = await screen.findByTestId('share-btn');
