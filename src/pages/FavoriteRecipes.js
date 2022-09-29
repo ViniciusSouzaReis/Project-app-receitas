@@ -7,13 +7,7 @@ function FavoriteRecipes() {
   const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
 
   const handleClick = ({ target }) => {
-    if (target.innerText === 'Meals') {
-      setFilter('meal');
-    } else if (target.innerText === 'Drinks') {
-      setFilter('drink');
-    } else {
-      setFilter('');
-    }
+    setFilter(target.name);
   };
 
   return (
@@ -24,6 +18,7 @@ function FavoriteRecipes() {
           type="button"
           onClick={ handleClick }
           data-testid="filter-by-all-btn"
+          name=""
         >
           All
         </button>
@@ -31,6 +26,7 @@ function FavoriteRecipes() {
           type="button"
           onClick={ handleClick }
           data-testid="filter-by-meal-btn"
+          name="meal"
         >
           Meals
         </button>
@@ -38,6 +34,7 @@ function FavoriteRecipes() {
           type="button"
           onClick={ handleClick }
           data-testid="filter-by-drink-btn"
+          name="drink"
         >
           Drinks
         </button>
