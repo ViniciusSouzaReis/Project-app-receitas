@@ -140,6 +140,8 @@ const mockRecipieDetail = {
   drinks: {},
 };
 
+console.log(mockRecipieDetail);
+
 beforeEach(() => {
   localStorage.setItem('doneRecipes', JSON.stringify(localStorageMockDone));
   localStorage.setItem('favoriteRecipes', JSON.stringify(localStorageMockFav));
