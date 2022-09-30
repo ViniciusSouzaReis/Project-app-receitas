@@ -13,29 +13,29 @@ function RecomedationDetail() {
 
   // console.log(recomedations[2].strMealThumb);
 
-  async function apiFetchRecomedations(type, filter, paramFilter) {
-    const URL = searchFoodApiRequest(type, filter, paramFilter);
+  async function apiFetchRecomedations(type = 'meal', filter, paramFilter) {
+    const URL = searchFoodApiRequest(type = 'meal', filter, paramFilter);
 
-    try {
-      const request = await fetch(URL);
-      const response = await request.json();
-      // console.log(URL);
+    // try {
+    const request = await fetch(URL);
+    const response = await request.json();
+    // console.log(URL);
+    // } catch (e) {
+    //   console.log(error);
+    // }
 
-      if (type === 'meal') {
-        if (response.meals === null) {
-          setRecomedations(response);
-        } else {
-          setRecomedations(response.meals);
-        }
-      } else if (type === 'cocktail') {
-        if (response.drinks === null) {
-          setRecomedations(response);
-        } else {
-          setRecomedations(response.drinks);
-        }
+    if (type === 'meal') {
+      if (response.meals === null) {
+        setRecomedations(response);
+      } else {
+        setRecomedations(response.meals);
       }
-    } catch (e) {
-      console.log(error);
+    } else if (type === 'cocktail') {
+      if (response.drinks === null) {
+        setRecomedations(response);
+      } else {
+        setRecomedations(response.drinks);
+      }
     }
   }
 

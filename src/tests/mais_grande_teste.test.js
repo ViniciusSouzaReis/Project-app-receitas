@@ -82,7 +82,7 @@ const URLparaAPI = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
 console.log(URLparaAPI);
 
 const mockRecipieDetail = {
-  meals: {
+  meals: [{
     idMeal: '52977',
     strMeal: 'Corba',
     strDrinkAlternate: null,
@@ -136,11 +136,12 @@ const mockRecipieDetail = {
     strImageSource: null,
     strCreativeCommonsConfirmed: null,
     dateModified: null,
-  },
-  drinks: {},
+  }],
+  drinks: [{}],
 };
 
 console.log(mockRecipieDetail);
+// global.fetch.mockClear();
 
 beforeEach(() => {
   localStorage.setItem('doneRecipes', JSON.stringify(localStorageMockDone));
@@ -237,8 +238,12 @@ describe('Teste de cobertura geral', () => {
     const btnType = await screen.findByTestId('meals-bottom-btn');
     userEvent.click(btnType);
 
+    global.fetch = jest.fn(() => Promise.resolve({
+      json: () => Promise.resolve(mockRecipieDetail),
+    }));
     const btnSearch3 = await screen.findByTestId('0-recipe-card');
     userEvent.click(btnSearch3);
+    global.fetch.mockClear();
 
     const btnFavorite3 = await screen.findByTestId(FAVORITE_BNT);
     userEvent.click(btnFavorite3);
