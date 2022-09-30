@@ -26,13 +26,13 @@ function RecomedationDetail() {
     //   console.log(error);
     // }
 
-    if (arrayPath[1] === 'meal') {
+    if (arrayPath[1] === 'meals') {
       if (!response.meals) {
         setRecomedations(response);
       } else {
         setRecomedations(response.meals);
       }
-    } else if (arrayPath[1] === 'drink') {
+    } else if (arrayPath[1] === 'drinks') {
       if (!response.drinks) {
         setRecomedations(response);
       } else {
