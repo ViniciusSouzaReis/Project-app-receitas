@@ -78,9 +78,6 @@ const localStorageMockInProgress = {
   meals: { 52977: [] },
 };
 
-const URLparaAPI = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
-console.log(URLparaAPI);
-
 const mockRecipieDetail = {
   meals: [{
     idMeal: '52977',
@@ -294,6 +291,7 @@ describe('Teste de cobertura geral', () => {
     }
 
     voltaMenu();
+
     // clicaCard('meals-bottom-btn');
     const btnDrink = await screen.findByTestId('drinks-bottom-btn');
     userEvent.click(btnDrink);
@@ -305,28 +303,29 @@ describe('Teste de cobertura geral', () => {
     userEvent.click(btnSearch4);
     global.fetch.mockClear();
 
-    voltaMenu();
+    // voltaMenu();
+    // history.back();
 
-    const btnType = await screen.findByTestId('meals-bottom-btn');
-    userEvent.click(btnType);
+    // const btnType = await screen.findByTestId('meals-bottom-btn');
+    // userEvent.click(btnType);
 
-    global.fetch = jest.fn(() => Promise.resolve({
-      json: () => Promise.resolve(mockRecipieDetail),
-    }));
-    const btnSearch3 = await screen.findByTestId('0-recipe-card');
-    userEvent.click(btnSearch3);
-    global.fetch.mockClear();
+    // global.fetch = jest.fn(() => Promise.resolve({
+    //   json: () => Promise.resolve(mockRecipieDetail),
+    // }));
+    // const btnSearch3 = await screen.findByTestId('0-recipe-card');
+    // userEvent.click(btnSearch3);
+    // global.fetch.mockClear();
 
-    voltaMenu();
+    // voltaMenu();
 
-    const btnType2 = await screen.findByTestId('meals-bottom-btn');
-    userEvent.click(btnType2);
+    // const btnType2 = await screen.findByTestId('meals-bottom-btn');
+    // userEvent.click(btnType2);
 
-    global.fetch = jest.fn(() => Promise.resolve({
-      json: () => Promise.resolve(mockRecipieDetail2),
-    }));
-    const btnSearch5 = await screen.findByTestId('0-recipe-card');
-    userEvent.click(btnSearch5);
-    global.fetch.mockClear();
+    // global.fetch = jest.fn(() => Promise.resolve({
+    //   json: () => Promise.resolve(mockRecipieDetail2),
+    // }));
+    // const btnSearch5 = await screen.findByTestId('0-recipe-card');
+    // userEvent.click(btnSearch5);
+    // global.fetch.mockClear();
   });
 });

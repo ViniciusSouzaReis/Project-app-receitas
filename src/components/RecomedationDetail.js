@@ -14,9 +14,9 @@ function RecomedationDetail() {
   // console.log(recomedations[2].strMealThumb);
 
   async function apiFetchRecomedations(type, filter, paramFilter) {
+    // if (!filter) filter = 'name';
+    // if (!paramFilter) paramFilter = '';
     const URL = searchFoodApiRequest(type, filter, paramFilter);
-
-    // if (!type) type = 'meal';
 
     // try {
     const request = await fetch(URL);
