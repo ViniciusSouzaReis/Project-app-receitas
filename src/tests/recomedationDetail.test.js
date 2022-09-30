@@ -78,16 +78,132 @@ const localStorageMockInProgress = {
   meals: { 52977: [] },
 };
 
-// const URLparaAPI = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
-// console.log(URLparaAPI);
+const URLparaAPI = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+console.log(URLparaAPI);
 
-// console.log(mockRecipieDetail);
+const mockRecipieDetail = {
+  meals: [{
+    idMeal: '52977',
+    strMeal: 'Corba',
+    strDrinkAlternate: null,
+    strCategory: 'Side',
+    strArea: 'Turkish',
+    strInstructions: 'Pick through your lentil…ridge for about a week.',
+    strMealThumb:	'https://www.themealdb.co…als/58oia61564916529.jpg',
+    strTags: 'Soup',
+    strYoutube: 'https://www.youtube.com/watch?v=VVnZd8A84z4',
+    strIngredient1: 'Lentils',
+    strIngredient2: 'Onion',
+    strIngredient3: 'Carrots',
+    strIngredient4: 'Tomato Puree',
+    strIngredient5: 'Cumin',
+    strIngredient6: 'Paprika',
+    strIngredient7: 'Mint',
+    strIngredient8: 'Thyme',
+    strIngredient9: 'Black Pepper',
+    strIngredient10: 'Red Pepper Flakes',
+    strIngredient11: 'Vegetable Stock',
+    strIngredient12: 'Water',
+    strIngredient13: 'Sea Salt',
+    strIngredient14: '',
+    strIngredient15: '',
+    strIngredient16: '',
+    strIngredient17: '',
+    strIngredient18: '',
+    strIngredient19: '',
+    strIngredient20: '',
+    strMeasure1: '1 cup ',
+    strMeasure2: '1 large',
+    strMeasure3: '1 large',
+    strMeasure4: '1 tbs',
+    strMeasure5: '2 tsp',
+    strMeasure6: '1 tsp ',
+    strMeasure7: '1/2 tsp',
+    strMeasure8: '1/2 tsp',
+    strMeasure9: '1/4 tsp',
+    strMeasure10: '1/4 tsp',
+    strMeasure11: '4 cups ',
+    strMeasure12: '1 cup ',
+    strMeasure13: 'Pinch',
+    strMeasure14: ' ',
+    strMeasure15: ' ',
+    strMeasure16: ' ',
+    strMeasure17: ' ',
+    strMeasure18: ' ',
+    strMeasure19: ' ',
+    strMeasure20: ' ',
+    strSource: 'https://findingtimeforcooking.com/main-dishes/red-lentil-soup-corba/',
+    strImageSource: null,
+    strCreativeCommonsConfirmed: null,
+    dateModified: null,
+  }],
+  drinks: [{
+    idDrink: '15997',
+    strDrink: 'GG',
+    strDrinkAlternate: null,
+    strTags: null,
+    strVideo: null,
+    strCategory: 'Ordinary Drink',
+    strIBA: null,
+    strAlcoholic: 'Optional alcohol',
+    strGlass: 'Collins Glass',
+    strInstructions: 'Pour the Galou now have a your very own GG.',
+    strInstructionsES: null,
+    strInstructionsDE: 'Den GallianoDu hast jetzt ein eigenes GG.',
+    strInstructionsFR: null,
+    strInstructionsIT: 'Versare il liquore Gnale.',
+    // strInstructionsZH-HANS:null,
+    // strInstructionsZH-HANT:null,
+    strDrinkThumb: 'https://www.thecocktaildb.com/images/media/drink/vyxwut1468875960.jpg',
+    strIngredient1: 'Galliano',
+    strIngredient2: 'Ginger ale',
+    strIngredient3: 'Ice',
+    strIngredient4: null,
+    strIngredient5: null,
+    strIngredient6: null,
+    strIngredient7: null,
+    strIngredient8: null,
+    strIngredient9: null,
+    strIngredient10: null,
+    strIngredient11: null,
+    strIngredient12: null,
+    strIngredient13: null,
+    strIngredient14: null,
+    strIngredient15: null,
+    strMeasure1: '2 1/2 shots ',
+    strMeasure2: null,
+    strMeasure3: null,
+    strMeasure4: null,
+    strMeasure5: null,
+    strMeasure6: null,
+    strMeasure7: null,
+    strMeasure8: null,
+    strMeasure9: null,
+    strMeasure10: null,
+    strMeasure11: null,
+    strMeasure12: null,
+    strMeasure13: null,
+    strMeasure14: null,
+    strMeasure15: null,
+    strImageSource: null,
+    strImageAttribution: null,
+    strCreativeCommonsConfirmed: 'No',
+    dateModified: '2016-07-18 22:06:00',
+  }],
+};
+
+const mockRecipieDetail2 = {
+  meals: null,
+  drinks: null,
+};
+
+console.log(mockRecipieDetail);
 // global.fetch.mockClear();
 
 beforeEach(() => {
   localStorage.setItem('doneRecipes', JSON.stringify(localStorageMockDone));
   localStorage.setItem('favoriteRecipes', JSON.stringify(localStorageMockFav));
-  localStorage.setItem('inProgressRecipes', JSON.stringify(localStorageMockInProgress));
+  // localStorage.setItem('inProgressRecipes', JSON.stringify(localStorageMockInProgress));
 });
 
 afterEach(() => {
@@ -125,7 +241,7 @@ function login() {
 describe('Teste de cobertura geral', () => {
   test('typing tests', async () => {
     jest.spyOn(navigator.clipboard, 'writeText');
-    const { history } = renderWithRouter(<App />);
+    renderWithRouter(<App />);
     // renderWithRouter(<App />);
 
     login();
@@ -137,8 +253,12 @@ describe('Teste de cobertura geral', () => {
       const btnType = await screen.findByTestId(texto);
       userEvent.click(btnType);
 
+      global.fetch = jest.fn(() => Promise.resolve({
+        json: () => Promise.resolve(mockRecipieDetail),
+      }));
       const btnSearch3 = await screen.findByTestId('0-recipe-card');
       userEvent.click(btnSearch3);
+      global.fetch.mockClear();
     }
 
     clicaCard('drinks-bottom-btn');
@@ -175,40 +295,38 @@ describe('Teste de cobertura geral', () => {
 
     voltaMenu();
     // clicaCard('meals-bottom-btn');
+    const btnDrink = await screen.findByTestId('drinks-bottom-btn');
+    userEvent.click(btnDrink);
+
+    global.fetch = jest.fn(() => Promise.resolve({
+      json: () => Promise.resolve(mockRecipieDetail2),
+    }));
+    const btnSearch4 = await screen.findByTestId('0-recipe-card');
+    userEvent.click(btnSearch4);
+    global.fetch.mockClear();
+
+    voltaMenu();
 
     const btnType = await screen.findByTestId('meals-bottom-btn');
     userEvent.click(btnType);
 
+    global.fetch = jest.fn(() => Promise.resolve({
+      json: () => Promise.resolve(mockRecipieDetail),
+    }));
     const btnSearch3 = await screen.findByTestId('0-recipe-card');
     userEvent.click(btnSearch3);
+    global.fetch.mockClear();
 
-    const btnFavorite3 = await screen.findByTestId(FAVORITE_BNT);
-    userEvent.click(btnFavorite3);
-    userEvent.click(btnFavorite3);
-    userEvent.click(btnFavorite3);
+    voltaMenu();
 
-    const getFavorite1 = screen.getByTestId('share-btn');
-    userEvent.click(getFavorite1);
+    const btnType2 = await screen.findByTestId('meals-bottom-btn');
+    userEvent.click(btnType2);
 
-    const btnStartRecipie2 = await screen.findByTestId('start-recipe-btn');
-    userEvent.click(btnStartRecipie2);
-
-    const btnFavorite4 = await screen.findByTestId(FAVORITE_BNT);
-    userEvent.click(btnFavorite4);
-    userEvent.click(btnFavorite4);
-    // global.copy = jest.fn().mockResolvedValue('');
-
-    // const btnShare2 = await screen.findByTestId('share-btn');
-    // userEvent.click(btnShare2);
-
-    // const mock = jest.fn(copy);
-
-    const btnShare2 = screen.getByTestId('share-btn');
-    jest.spyOn(navigator.clipboard, 'writeText');
-    userEvent.click(btnShare2);
-
-    // handleShare();
-
-    history.push('/');
+    global.fetch = jest.fn(() => Promise.resolve({
+      json: () => Promise.resolve(mockRecipieDetail2),
+    }));
+    const btnSearch5 = await screen.findByTestId('0-recipe-card');
+    userEvent.click(btnSearch5);
+    global.fetch.mockClear();
   });
 });

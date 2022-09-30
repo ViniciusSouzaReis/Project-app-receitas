@@ -54,10 +54,9 @@ function RecomedationDetail() {
 
   useEffect(() => () => { OK_FETCH = true; }, []);
   //
-
   return (
     <div style={ { display: 'flex', width: '100%', overflowX: 'scroll' } }>
-      { (arrayPath[1] === 'drinks') ? (
+      { (arrayPath[1] === 'drinks' && recomedations.drink) ? (
         recomedations.map((
           { strMeal, idMeal, strMealThumb },
           index,
@@ -77,24 +76,26 @@ function RecomedationDetail() {
           </div>
         ))
       ) : (
-        recomedations.map((
-          { strDrink, idDrink, strDrinkThumb },
-          index,
-        ) => index < MAX_CARROUSEL && (
-          <div key={ index }>
-            <CardRecipies
-              index={ index }
-              key={ idDrink }
-              width="50vw"
-              urlImage={ strDrinkThumb }
-              nameRecipie={ strDrink }
-              id={ idDrink }
-              type="drinks"
-              idTeste={ {
-                idCard: 'recommendation-card', idTitle: 'recommendation-title' } }
-            />
-          </div>
-        ))
+        (recomedations.meal) && (
+          recomedations.map((
+            { strDrink, idDrink, strDrinkThumb },
+            index,
+          ) => index < MAX_CARROUSEL && (
+            <div key={ index }>
+              <CardRecipies
+                index={ index }
+                key={ idDrink }
+                width="50vw"
+                urlImage={ strDrinkThumb }
+                nameRecipie={ strDrink }
+                id={ idDrink }
+                type="drinks"
+                idTeste={ {
+                  idCard: 'recommendation-card', idTitle: 'recommendation-title' } }
+              />
+            </div>
+          ))
+        )
       )}
     </div>
   );
