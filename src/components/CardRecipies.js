@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 
 function CardRecipies({
-  index, urlImage, nameRecipie, id, type, width = '18rem', idTeste }) {
+  index, urlImage, nameRecipie, id, type, width, idTeste }) {
   const { push } = useHistory();
   const { idCard, idTitle } = idTeste;
 

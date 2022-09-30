@@ -31,6 +31,8 @@ function logout() {
   userEvent.click(btnLogout);
 }
 
+jest.setTimeout(10000);
+
 describe('Teste de cobertura geral', () => {
   test('typing tests', async () => {
     const { history } = renderWithRouter(<App />);

@@ -26,13 +26,17 @@ function RecomedationDetail() {
     //   console.log(error);
     // }
 
-    if (arrayPath[1] === 'meals') {
+    // console.log(arrayPath[1]);
+    console.log(response);
+    // console.log(URL);
+
+    if (arrayPath[1] === 'drinks') {
       if (!response.meals) {
         setRecomedations(response);
       } else {
         setRecomedations(response.meals);
       }
-    } else if (arrayPath[1] === 'drinks') {
+    } else if (arrayPath[1] === 'meals') {
       if (!response.drinks) {
         setRecomedations(response);
       } else {
@@ -49,6 +53,7 @@ function RecomedationDetail() {
         apiFetchRecomedations('cocktail', 'name', '');
       }
     }
+    console.log(recomedations);
     OK_FETCH = false;
   }, [arrayPath]);
 
@@ -56,7 +61,7 @@ function RecomedationDetail() {
   //
   return (
     <div style={ { display: 'flex', width: '100%', overflowX: 'scroll' } }>
-      { (arrayPath[1] === 'drinks' && recomedations.drink) ? (
+      { (arrayPath[1] === 'drinks') ? (
         recomedations.map((
           { strMeal, idMeal, strMealThumb },
           index,
@@ -76,7 +81,7 @@ function RecomedationDetail() {
           </div>
         ))
       ) : (
-        (recomedations.meal) && (
+        (arrayPath[1] === 'meals') && (
           recomedations.map((
             { strDrink, idDrink, strDrinkThumb },
             index,

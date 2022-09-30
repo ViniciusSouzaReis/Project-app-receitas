@@ -198,7 +198,7 @@ console.log(mockRecipieDetail);
 // global.fetch.mockClear();
 
 beforeEach(() => {
-  localStorage.setItem('doneRecipes', JSON.stringify(localStorageMockDone));
+  // localStorage.setItem('doneRecipes', JSON.stringify(localStorageMockDone));
   localStorage.setItem('favoriteRecipes', JSON.stringify(localStorageMockFav));
   // localStorage.setItem('inProgressRecipes', JSON.stringify(localStorageMockInProgress));
 });
@@ -290,18 +290,18 @@ describe('Teste de cobertura geral', () => {
       userEvent.click(btnProfile);
     }
 
-    voltaMenu();
+    // voltaMenu();
 
-    // clicaCard('meals-bottom-btn');
-    const btnDrink = await screen.findByTestId('drinks-bottom-btn');
-    userEvent.click(btnDrink);
+    // // clicaCard('meals-bottom-btn');
+    // const btnDrink = await screen.findByTestId('drinks-bottom-btn');
+    // userEvent.click(btnDrink);
 
-    global.fetch = jest.fn(() => Promise.resolve({
-      json: () => Promise.resolve(mockRecipieDetail2),
-    }));
-    const btnSearch4 = await screen.findByTestId('0-recipe-card');
-    userEvent.click(btnSearch4);
-    global.fetch.mockClear();
+    // global.fetch = jest.fn(() => Promise.resolve({
+    //   json: () => Promise.resolve(mockRecipieDetail2),
+    // }));
+    // const btnSearch4 = await screen.findByTestId('0-recipe-card');
+    // userEvent.click(btnSearch4);
+    // global.fetch.mockClear();
 
     // voltaMenu();
     // history.back();
