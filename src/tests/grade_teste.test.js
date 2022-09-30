@@ -37,8 +37,23 @@ describe('Teste de cobertura geral', () => {
 
     login();
 
-    const btnMeals = screen.getByTestId('meals-bottom-btn');
+    const btnMeals = await screen.findByTestId('meals-bottom-btn');
     userEvent.click(btnMeals);
+
+    const btnCategory1 = await screen.findByTestId('Beef-category-filter');
+    userEvent.click(btnCategory1);
+
+    const btnCategory2 = await screen.findByTestId('Chicken-category-filter');
+    userEvent.click(btnCategory2);
+
+    const btnCategory3 = await screen.findByTestId('Dessert-category-filter');
+    userEvent.click(btnCategory3);
+
+    const btnCategory4 = await screen.findByTestId('Goat-category-filter');
+    userEvent.click(btnCategory4);
+
+    const btnCategory5 = await screen.findByTestId('All-category-filter');
+    userEvent.click(btnCategory5);
 
     function testaHeader() {
       const btnSearch = screen.getByTestId(SEARCH_BTN);
@@ -68,6 +83,25 @@ describe('Teste de cobertura geral', () => {
 
     const btnDrinks = await screen.findByTestId('drinks-bottom-btn');
     userEvent.click(btnDrinks);
+
+    const btnCategory6 = await screen.findByTestId('Ordinary Drink-category-filter');
+    userEvent.click(btnCategory6);
+
+    const btnCategory7 = await screen.findByTestId('Cocktail-category-filter');
+    userEvent.click(btnCategory7);
+
+    const btnCategory8 = await screen.findByTestId('Shake-category-filter');
+    userEvent.click(btnCategory8);
+
+    const btnCategory9 = await screen.findByTestId('Other/Unknown-category-filter');
+    userEvent.click(btnCategory9);
+
+    const btnCategory11 = await screen.findByTestId('Cocoa-category-filter');
+    userEvent.click(btnCategory11);
+
+    const btnCategory10 = await screen.findByTestId('All-category-filter');
+    userEvent.click(btnCategory10);
+
     testaHeader();
 
     logout();

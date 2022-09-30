@@ -124,6 +124,9 @@ describe('Teste de cobertura geral', () => {
 
     login();
 
+    const btnMeals = await screen.findByTestId('meals-bottom-btn');
+    userEvent.click(btnMeals);
+
     async function clicaCard(texto) {
       const btnType = await screen.findByTestId(texto);
       userEvent.click(btnType);
