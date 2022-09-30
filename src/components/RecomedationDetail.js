@@ -13,8 +13,10 @@ function RecomedationDetail() {
 
   // console.log(recomedations[2].strMealThumb);
 
-  async function apiFetchRecomedations(type = 'meal', filter, paramFilter) {
-    const URL = searchFoodApiRequest(type = 'meal', filter, paramFilter);
+  async function apiFetchRecomedations(type, filter, paramFilter) {
+    const URL = searchFoodApiRequest(type, filter, paramFilter);
+
+    // if (!type) type = 'meal';
 
     // try {
     const request = await fetch(URL);
@@ -24,14 +26,14 @@ function RecomedationDetail() {
     //   console.log(error);
     // }
 
-    if (type === 'meal') {
-      if (response.meals === null) {
+    if (arrayPath[1] === 'meal') {
+      if (!response.meals) {
         setRecomedations(response);
       } else {
         setRecomedations(response.meals);
       }
-    } else if (type === 'cocktail') {
-      if (response.drinks === null) {
+    } else if (arrayPath[1] === 'drink') {
+      if (!response.drinks) {
         setRecomedations(response);
       } else {
         setRecomedations(response.drinks);

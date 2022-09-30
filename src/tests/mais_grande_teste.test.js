@@ -78,69 +78,69 @@ const localStorageMockInProgress = {
   meals: { 52977: [] },
 };
 
-const URLparaAPI = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
-console.log(URLparaAPI);
+// const URLparaAPI = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+// console.log(URLparaAPI);
 
-const mockRecipieDetail = {
-  meals: [{
-    idMeal: '52977',
-    strMeal: 'Corba',
-    strDrinkAlternate: null,
-    strCategory: 'Side',
-    strArea: 'Turkish',
-    strInstructions: 'Pick through your lentil…ridge for about a week.',
-    strMealThumb:	'https://www.themealdb.co…als/58oia61564916529.jpg',
-    strTags: 'Soup',
-    strYoutube: 'https://www.youtube.com/watch?v=VVnZd8A84z4',
-    strIngredient1: 'Lentils',
-    strIngredient2: 'Onion',
-    strIngredient3: 'Carrots',
-    strIngredient4: 'Tomato Puree',
-    strIngredient5: 'Cumin',
-    strIngredient6: 'Paprika',
-    strIngredient7: 'Mint',
-    strIngredient8: 'Thyme',
-    strIngredient9: 'Black Pepper',
-    strIngredient10: 'Red Pepper Flakes',
-    strIngredient11: 'Vegetable Stock',
-    strIngredient12: 'Water',
-    strIngredient13: 'Sea Salt',
-    strIngredient14: '',
-    strIngredient15: '',
-    strIngredient16: '',
-    strIngredient17: '',
-    strIngredient18: '',
-    strIngredient19: '',
-    strIngredient20: '',
-    strMeasure1: '1 cup ',
-    strMeasure2: '1 large',
-    strMeasure3: '1 large',
-    strMeasure4: '1 tbs',
-    strMeasure5: '2 tsp',
-    strMeasure6: '1 tsp ',
-    strMeasure7: '1/2 tsp',
-    strMeasure8: '1/2 tsp',
-    strMeasure9: '1/4 tsp',
-    strMeasure10: '1/4 tsp',
-    strMeasure11: '4 cups ',
-    strMeasure12: '1 cup ',
-    strMeasure13: 'Pinch',
-    strMeasure14: ' ',
-    strMeasure15: ' ',
-    strMeasure16: ' ',
-    strMeasure17: ' ',
-    strMeasure18: ' ',
-    strMeasure19: ' ',
-    strMeasure20: ' ',
-    strSource: 'https://findingtimeforcooking.com/main-dishes/red-lentil-soup-corba/',
-    strImageSource: null,
-    strCreativeCommonsConfirmed: null,
-    dateModified: null,
-  }],
-  drinks: [{}],
-};
+// const mockRecipieDetail = {
+//   meals: [{
+//     idMeal: '52977',
+//     strMeal: 'Corba',
+//     strDrinkAlternate: null,
+//     strCategory: 'Side',
+//     strArea: 'Turkish',
+//     strInstructions: 'Pick through your lentil…ridge for about a week.',
+//     strMealThumb:	'https://www.themealdb.co…als/58oia61564916529.jpg',
+//     strTags: 'Soup',
+//     strYoutube: 'https://www.youtube.com/watch?v=VVnZd8A84z4',
+//     strIngredient1: 'Lentils',
+//     strIngredient2: 'Onion',
+//     strIngredient3: 'Carrots',
+//     strIngredient4: 'Tomato Puree',
+//     strIngredient5: 'Cumin',
+//     strIngredient6: 'Paprika',
+//     strIngredient7: 'Mint',
+//     strIngredient8: 'Thyme',
+//     strIngredient9: 'Black Pepper',
+//     strIngredient10: 'Red Pepper Flakes',
+//     strIngredient11: 'Vegetable Stock',
+//     strIngredient12: 'Water',
+//     strIngredient13: 'Sea Salt',
+//     strIngredient14: '',
+//     strIngredient15: '',
+//     strIngredient16: '',
+//     strIngredient17: '',
+//     strIngredient18: '',
+//     strIngredient19: '',
+//     strIngredient20: '',
+//     strMeasure1: '1 cup ',
+//     strMeasure2: '1 large',
+//     strMeasure3: '1 large',
+//     strMeasure4: '1 tbs',
+//     strMeasure5: '2 tsp',
+//     strMeasure6: '1 tsp ',
+//     strMeasure7: '1/2 tsp',
+//     strMeasure8: '1/2 tsp',
+//     strMeasure9: '1/4 tsp',
+//     strMeasure10: '1/4 tsp',
+//     strMeasure11: '4 cups ',
+//     strMeasure12: '1 cup ',
+//     strMeasure13: 'Pinch',
+//     strMeasure14: ' ',
+//     strMeasure15: ' ',
+//     strMeasure16: ' ',
+//     strMeasure17: ' ',
+//     strMeasure18: ' ',
+//     strMeasure19: ' ',
+//     strMeasure20: ' ',
+//     strSource: 'https://findingtimeforcooking.com/main-dishes/red-lentil-soup-corba/',
+//     strImageSource: null,
+//     strCreativeCommonsConfirmed: null,
+//     dateModified: null,
+//   }],
+//   drinks: [{}],
+// };
 
-console.log(mockRecipieDetail);
+// console.log(mockRecipieDetail);
 // global.fetch.mockClear();
 
 beforeEach(() => {
@@ -238,12 +238,8 @@ describe('Teste de cobertura geral', () => {
     const btnType = await screen.findByTestId('meals-bottom-btn');
     userEvent.click(btnType);
 
-    global.fetch = jest.fn(() => Promise.resolve({
-      json: () => Promise.resolve(mockRecipieDetail),
-    }));
     const btnSearch3 = await screen.findByTestId('0-recipe-card');
     userEvent.click(btnSearch3);
-    global.fetch.mockClear();
 
     const btnFavorite3 = await screen.findByTestId(FAVORITE_BNT);
     userEvent.click(btnFavorite3);
@@ -274,5 +270,4 @@ describe('Teste de cobertura geral', () => {
 
     history.push('/');
   });
-  test('typing tests', async () => {});
 });
