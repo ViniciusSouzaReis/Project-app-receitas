@@ -15,8 +15,10 @@
 // }
 // const readProductCard = (id) => JSON.parse(localStorage.getItem(id)) || [];
 
-export const saveProductCard = (id, product) => localStorage
+const saveProductCard = (id, product) => localStorage
   .setItem(id, JSON.stringify(product));
+
+export default saveProductCard;
 
 // export const getListAvaliation = (id) => readProductCard(id);
 

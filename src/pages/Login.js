@@ -1,7 +1,7 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import UserContext from '../Api-Context/contexts/UserContext';
-import { saveProductCard } from '../services/userLocalStorage';
+import saveProductCard from '../services/userLocalStorage';
 
 let OK_CHANGE = false;
 
