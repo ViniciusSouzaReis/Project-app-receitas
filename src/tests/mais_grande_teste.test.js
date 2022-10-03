@@ -160,7 +160,9 @@ describe('Teste de cobertura geral', () => {
       userEvent.click(btnFavorite);
 
       const checkbox = screen.getAllByLabelText(/Check Ingredients/i);
-      console.log(checkbox);
+
+      userEvent.click(checkbox[0]);
+      userEvent.click(checkbox[0]);
       checkbox.map((e) => (
         userEvent.click(e)
       ));

@@ -16,7 +16,7 @@ function RecipeInProgress() {
     } else {
       apiFetch('cocktail', 'detail', arrayPath[2]);
     }
-  }, [apiFetch, arrayPath]);
+  }, []);
 
   return (
     <div style={ { display: 'flex', flexDirection: 'column', alignItems: 'center' } }>

@@ -8,6 +8,10 @@ const PROFILE_BTN = 'profile-top-btn';
 const SEARCH_BTN = 'search-top-btn';
 const SEARCH_INPUT = 'search-input';
 const FILTER_BTN = 'exec-search-btn';
+const NAME_FILTER = 'name-search-radio';
+
+jest.setTimeout(10000);
+window.alert = jest.fn('retornou');
 
 function login() {
   const emailInput = screen.getByTestId('email-input');
@@ -65,7 +69,7 @@ describe('Teste de cobertura geral', () => {
       const searchInput = screen.getByTestId(SEARCH_INPUT);
       const radInputIngredient = screen.getByTestId('ingredient-search-radio');
       const radInputFirstLetter = screen.getByTestId('first-letter-search-radio');
-      const radInputName = screen.getByTestId('name-search-radio');
+      const radInputName = screen.getByTestId(NAME_FILTER);
       const btnFilter = screen.getByTestId(FILTER_BTN);
 
       userEvent.type(searchInput, 'b');
@@ -120,6 +124,10 @@ describe('Teste de cobertura geral', () => {
     const btnFilter = screen.getByTestId(FILTER_BTN);
     userEvent.click(btnFilter);
 
+    const radInputName = screen.getByTestId(NAME_FILTER);
+    userEvent.click(radInputName);
+    userEvent.click(btnFilter);
+
     logout();
     login();
 
@@ -148,7 +156,7 @@ describe('Teste de cobertura geral', () => {
     const searchInput2 = await screen.findByTestId(SEARCH_INPUT);
     userEvent.type(searchInput2, 'Corba');
 
-    const radInputName2 = await screen.findByTestId('name-search-radio');
+    const radInputName2 = await screen.findByTestId(NAME_FILTER);
     userEvent.click(radInputName2);
 
     const btnFilter2 = await screen.findByTestId(FILTER_BTN);

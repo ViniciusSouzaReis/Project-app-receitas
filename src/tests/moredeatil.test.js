@@ -4,9 +4,12 @@ import userEvent from '@testing-library/user-event';
 import App from '../App';
 import renderWithRouter from '../services/renderWithRouter';
 
+jest.setTimeout(15000);
+
 // const copy = require('clipboard-copy');
 // document.execCommand = jest.fn('copy').mockResolvedValue('');
 document.execCommand = jest.fn().mockResolvedValue('');
+window.alert = jest.fn('retornou');
 
 Object.assign(navigator, {
   clipboard: {
