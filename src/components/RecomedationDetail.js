@@ -31,17 +31,19 @@ function RecomedationDetail() {
     // console.log(URL);
 
     if (arrayPath[1] === 'drinks') {
-      if (!response.meals) {
-        setRecomedations(response);
-      } else {
-        setRecomedations(response.meals);
-      }
-    } else if (arrayPath[1] === 'meals') {
-      if (!response.drinks) {
-        setRecomedations(response);
-      } else {
-        setRecomedations(response.drinks);
-      }
+      setRecomedations(response.meals);
+      // if (!response.meals) {
+      //   // setRecomedations(response);
+      // } else {
+      //   setRecomedations(response.meals);
+      // }
+    } else {
+      setRecomedations(response.drinks);
+      // if (!response.drinks) {
+      //   // setRecomedations(response);
+      // } else {
+      //   setRecomedations(response.drinks);
+      // }
     }
   }
 
