@@ -78,6 +78,12 @@ const localStorageMockInProgress = {
   meals: { 52977: [] },
 };
 
+// const URLparaAPI = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+// console.log(URLparaAPI);
+
+// console.log(mockRecipieDetail);
+// global.fetch.mockClear();
+
 beforeEach(() => {
   localStorage.setItem('doneRecipes', JSON.stringify(localStorageMockDone));
   localStorage.setItem('favoriteRecipes', JSON.stringify(localStorageMockFav));
@@ -116,6 +122,8 @@ function login() {
 //   userEvent.click(btnLogout);
 // }
 
+jest.setTimeout(10000);
+
 describe('Teste de cobertura geral', () => {
   test('typing tests', async () => {
     jest.spyOn(navigator.clipboard, 'writeText');
@@ -123,6 +131,9 @@ describe('Teste de cobertura geral', () => {
     // renderWithRouter(<App />);
 
     login();
+
+    const btnMeals = await screen.findByTestId('meals-bottom-btn');
+    userEvent.click(btnMeals);
 
     async function clicaCard(texto) {
       const btnType = await screen.findByTestId(texto);
@@ -202,5 +213,4 @@ describe('Teste de cobertura geral', () => {
 
     history.push('/');
   });
-  test('typing tests', async () => {});
 });

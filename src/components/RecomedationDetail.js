@@ -14,28 +14,34 @@ function RecomedationDetail() {
   // console.log(recomedations[2].strMealThumb);
 
   async function apiFetchRecomedations(type, filter, paramFilter) {
+    // if (!filter) filter = 'name';
+    // if (!paramFilter) paramFilter = '';
     const URL = searchFoodApiRequest(type, filter, paramFilter);
 
-    try {
-      const request = await fetch(URL);
-      const response = await request.json();
-      // console.log(URL);
+    // try {
+    const request = await fetch(URL);
+    const response = await request.json();
+    // console.log(URL);
+    // } catch (e) {
+    //   console.log(error);
+    // }
 
-      if (type === 'meal') {
-        if (response.meals === null) {
-          setRecomedations(response);
-        } else {
-          setRecomedations(response.meals);
-        }
-      } else if (type === 'cocktail') {
-        if (response.drinks === null) {
-          setRecomedations(response);
-        } else {
-          setRecomedations(response.drinks);
-        }
+    // console.log(arrayPath[1]);
+    console.log(response);
+    // console.log(URL);
+
+    if (arrayPath[1] === 'drinks') {
+      if (!response.meals) {
+        setRecomedations(response);
+      } else {
+        setRecomedations(response.meals);
       }
-    } catch (e) {
-      console.log(error);
+    } else if (arrayPath[1] === 'meals') {
+      if (!response.drinks) {
+        setRecomedations(response);
+      } else {
+        setRecomedations(response.drinks);
+      }
     }
   }
 
@@ -47,12 +53,12 @@ function RecomedationDetail() {
         apiFetchRecomedations('cocktail', 'name', '');
       }
     }
+    console.log(recomedations);
     OK_FETCH = false;
   }, [arrayPath]);
 
   useEffect(() => () => { OK_FETCH = true; }, []);
   //
-
   return (
     <div style={ { display: 'flex', width: '100%', overflowX: 'scroll' } }>
       { (arrayPath[1] === 'drinks') ? (
@@ -75,24 +81,26 @@ function RecomedationDetail() {
           </div>
         ))
       ) : (
-        recomedations.map((
-          { strDrink, idDrink, strDrinkThumb },
-          index,
-        ) => index < MAX_CARROUSEL && (
-          <div key={ index }>
-            <CardRecipies
-              index={ index }
-              key={ idDrink }
-              width="50vw"
-              urlImage={ strDrinkThumb }
-              nameRecipie={ strDrink }
-              id={ idDrink }
-              type="drinks"
-              idTeste={ {
-                idCard: 'recommendation-card', idTitle: 'recommendation-title' } }
-            />
-          </div>
-        ))
+        (arrayPath[1] === 'meals') && (
+          recomedations.map((
+            { strDrink, idDrink, strDrinkThumb },
+            index,
+          ) => index < MAX_CARROUSEL && (
+            <div key={ index }>
+              <CardRecipies
+                index={ index }
+                key={ idDrink }
+                width="50vw"
+                urlImage={ strDrinkThumb }
+                nameRecipie={ strDrink }
+                id={ idDrink }
+                type="drinks"
+                idTeste={ {
+                  idCard: 'recommendation-card', idTitle: 'recommendation-title' } }
+              />
+            </div>
+          ))
+        )
       )}
     </div>
   );
