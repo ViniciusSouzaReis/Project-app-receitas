@@ -9,26 +9,26 @@ function RecipesProvider({ children }) {
   const apiFetch = async (type, filter, paramFilter) => {
     const URL = searchFoodApiRequest(type, filter, paramFilter);
 
-    try {
-      const request = await fetch(URL);
-      const response = await request.json();
+    // try {
+    const request = await fetch(URL);
+    const response = await request.json();
 
-      if (type === 'meal') {
-        if (response.meals === null) {
-          setApiReturn(response);
-        } else {
-          setApiReturn(response.meals);
-        }
-      } else if (type === 'cocktail') {
-        if (response.drinks === null) {
-          setApiReturn(response);
-        } else {
-          setApiReturn(response.drinks);
-        }
+    if (type === 'meal') {
+      if (response.meals === null) {
+        setApiReturn(response);
+      } else {
+        setApiReturn(response.meals);
       }
-    } catch (e) {
-      console.log(error);
+    } else if (type === 'cocktail') {
+      if (response.drinks === null) {
+        setApiReturn(response);
+      } else {
+        setApiReturn(response.drinks);
+      }
     }
+    // } catch (e) {
+    //   console.log(error);
+    // }
   };
 
   const contextValues = useMemo(() => ({

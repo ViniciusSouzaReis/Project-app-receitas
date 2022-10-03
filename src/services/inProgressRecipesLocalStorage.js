@@ -35,7 +35,7 @@
 //   simulateRequest(SUCCESS_STATUS)(resolve);
 // });
 
-const IN_PROGRESS_RECIPES = 'inProgressRecipes';
+// const IN_PROGRESS_RECIPES = 'inProgressRecipes';
 const TIMEOUT = 500;
 const SUCCESS_STATUS = 'OK';
 
@@ -67,31 +67,31 @@ export const addInProgressRecipes = (key, value) => new Promise((resolve) => {
   simulateRequest(SUCCESS_STATUS)(resolve);
 });
 
-export const addObjectInProgress = (id, value, type) => new Promise((resolve) => {
-  if (type === 'meals') {
-    const prevValue = JSON.parse(localStorage.getItem(IN_PROGRESS_RECIPES));
-    saveInProgressRecipes(IN_PROGRESS_RECIPES, {
-      ...prevValue,
-      meals: {
-        ...prevValue.meals,
-        [id]: value,
-      },
-    });
-  } else {
-    const prevValue = JSON.parse(localStorage.getItem(IN_PROGRESS_RECIPES));
-    saveInProgressRecipes(IN_PROGRESS_RECIPES, {
-      ...prevValue,
-      drinks: {
-        ...prevValue.drinks,
-        [id]: value,
-      },
-    });
-  }
-  simulateRequest(SUCCESS_STATUS)(resolve);
-});
+// export const addObjectInProgress = (id, value, type) => new Promise((resolve) => {
+//   if (type === 'meals') {
+//     const prevValue = JSON.parse(localStorage.getItem(IN_PROGRESS_RECIPES));
+//     saveInProgressRecipes(IN_PROGRESS_RECIPES, {
+//       ...prevValue,
+//       meals: {
+//         ...prevValue.meals,
+//         [id]: value,
+//       },
+//     });
+//   } else {
+//     const prevValue = JSON.parse(localStorage.getItem(IN_PROGRESS_RECIPES));
+//     saveInProgressRecipes(IN_PROGRESS_RECIPES, {
+//       ...prevValue,
+//       drinks: {
+//         ...prevValue.drinks,
+//         [id]: value,
+//       },
+//     });
+//   }
+//   simulateRequest(SUCCESS_STATUS)(resolve);
+// });
 
-export const removeDoneRecipes = (key) => new Promise((resolve) => {
-  const favoriteSongs = readInProgressRecipes(key);
-  saveInProgressRecipes(favoriteSongs.filter((s) => s.trackId !== key.trackId));
-  simulateRequest(SUCCESS_STATUS)(resolve);
-});
+// export const removeDoneRecipes = (key) => new Promise((resolve) => {
+//   const favoriteSongs = readInProgressRecipes(key);
+//   saveInProgressRecipes(favoriteSongs.filter((s) => s.trackId !== key.trackId));
+//   simulateRequest(SUCCESS_STATUS)(resolve);
+// });

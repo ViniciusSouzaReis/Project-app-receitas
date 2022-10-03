@@ -18,7 +18,9 @@ function InProgressDetails({ imgUrl, nameRecipie }) {
   const { apiReturn } = useContext(RecipesContext);
   const { push, location: { pathname } } = useHistory();
   const [clippedText, setClippedText] = useState(false);
-  const [newClass, setNewClass] = useState('');
+  // const [newClass, setNewClass] = useState('');
+  const [checkRender, setCheckRender] = useState(true);
+  const [inProgress, setInProgress] = useState([]);
   const [indexToCompare, setIndexToCompare] = useState(0);
   const [renderCheck, setRenderCheck] = useState(true);
   const [isFave, setFaveSwitch] = useState(IS_FAVE);
@@ -49,13 +51,35 @@ function InProgressDetails({ imgUrl, nameRecipie }) {
     }
   }, [apiReturn, arrayPath]);
 
-  const handleClick = () => {
+  useEffect(() => {
+    setCheckRender(false);
+    const recipeId = JSON.parse(localStorage.getItem(arrayPath[2]));
+    if (recipeId) {
+      setInProgress(recipeId);
+    }
+  }, []);
+
+  useEffect(() => {
+    const recipeId = JSON.parse(localStorage.getItem(arrayPath[2]));
+    if (recipeId) {
+      saveInProgressRecipes(arrayPath[2], inProgress);
+    } else {
+      saveInProgressRecipes(arrayPath[2], []);
+    }
+  }, [inProgress, arrayPath]);
+
+  const handleClick = async (item) => {
     if (indexToCompare < arrayIgredients.length - 1) {
       setIndexToCompare((prev) => prev + 1);
     } else {
       setRenderCheck(false);
     }
-    setNewClass('checkboxDecoration');
+    if (inProgress.some((inProgressItem) => inProgressItem === item)) {
+      const newChecks = inProgress.filter((inProgressItem) => inProgressItem !== item);
+      await setInProgress(newChecks);
+    } else {
+      setInProgress([...inProgress, item]);
+    }
   };
 
   const handleFinishButton = () => {
@@ -137,16 +161,19 @@ function InProgressDetails({ imgUrl, nameRecipie }) {
           {arrayIgredients.map((item, index) => (
             <>
               <label
-                htmlFor={ `id${index}` }
+                htmlFor={ index }
                 data-testid={ `${index}-ingredient-step` }
                 key={ item }
               >
                 Check Ingredients
+                {' '}
                 <input
                   type="checkbox"
-                  id={ `id${index}` }
-                  onClick={ handleClick }
+                  id={ index }
+                  onChange={ () => { handleClick(item); } }
                   key={ `${item}${index}` }
+                  checked={ checkRender || inProgress
+                    .some((inProgressItem) => inProgressItem === item) }
                 />
               </label>
               <li
@@ -154,7 +181,7 @@ function InProgressDetails({ imgUrl, nameRecipie }) {
                 data-testid={ `${index}-ingredient-name-and-measure` }
               >
                 { (item) && (
-                  <span className={ newClass }>
+                  <span>
                     {item}
                     {' '}
                     .........
