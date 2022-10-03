@@ -41,42 +41,42 @@ const localStorageMockFav = [
   },
 ];
 
-const localStorageMockDone = [{
-  alcoholicOrNot: '',
-  category: 'Vegetarian',
-  doneDate: '23/06/2020',
-  id: '52771',
-  image: 'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg',
-  name: 'Spicy Arrabiata Penne',
-  nationality: 'Italian',
-  tags: ['Pasta', 'Curry'],
-  type: 'meal',
-}, {
-  alcoholicOrNot: 'Alcoholic',
-  category: 'Cocktail',
-  doneDate: '23/06/2020',
-  id: '178319',
-  image: 'https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg',
-  name: 'Aquamarine',
-  nationality: '',
-  tags: [],
-  type: 'drink',
-}, {
-  alcoholicOrNot: '',
-  category: 'Side',
-  doneDate: '29/09/2022',
-  id: '53060',
-  image: 'https://www.themealdb.com/images/media/meals/tkxquw1628771028.jpg',
-  name: 'Burek',
-  nationality: 'Croatian',
-  tags: ['Streetfood', 'Onthego'],
-  type: 'meal',
-}];
+// const localStorageMockDone = [{
+//   alcoholicOrNot: '',
+//   category: 'Vegetarian',
+//   doneDate: '23/06/2020',
+//   id: '52771',
+//   image: 'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg',
+//   name: 'Spicy Arrabiata Penne',
+//   nationality: 'Italian',
+//   tags: ['Pasta', 'Curry'],
+//   type: 'meal',
+// }, {
+//   alcoholicOrNot: 'Alcoholic',
+//   category: 'Cocktail',
+//   doneDate: '23/06/2020',
+//   id: '178319',
+//   image: 'https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg',
+//   name: 'Aquamarine',
+//   nationality: '',
+//   tags: [],
+//   type: 'drink',
+// }, {
+//   alcoholicOrNot: '',
+//   category: 'Side',
+//   doneDate: '29/09/2022',
+//   id: '53060',
+//   image: 'https://www.themealdb.com/images/media/meals/tkxquw1628771028.jpg',
+//   name: 'Burek',
+//   nationality: 'Croatian',
+//   tags: ['Streetfood', 'Onthego'],
+//   type: 'meal',
+// }];
 
-const localStorageMockInProgress = {
-  drinks: { 15997: [] },
-  meals: { 52977: [] },
-};
+// const localStorageMockInProgress = {
+//   drinks: { 15997: [] },
+//   meals: { 52977: [] },
+// };
 
 const mockRecipieDetail = {
   meals: [{
@@ -86,7 +86,7 @@ const mockRecipieDetail = {
     strCategory: 'Side',
     strArea: 'Turkish',
     strInstructions: 'Pick through your lentil…ridge for about a week.',
-    strMealThumb:	'https://www.themealdb.co…als/58oia61564916529.jpg',
+    strMealThumb: 'https://www.themealdb.co…als/58oia61564916529.jpg',
     strTags: 'Soup',
     strYoutube: 'https://www.youtube.com/watch?v=VVnZd8A84z4',
     strIngredient1: 'Lentils',
@@ -189,10 +189,10 @@ const mockRecipieDetail = {
   }],
 };
 
-const mockRecipieDetail2 = {
-  meals: null,
-  drinks: null,
-};
+// const mockRecipieDetail2 = {
+//   meals: null,
+//   drinks: null,
+// };
 
 console.log(mockRecipieDetail);
 // global.fetch.mockClear();
@@ -207,7 +207,7 @@ afterEach(() => {
   localStorage.clear();
 });
 
-const PROFILE_BTN = 'profile-top-btn';
+// const PROFILE_BTN = 'profile-top-btn';
 const FAVORITE_BNT = 'favorite-btn';
 // const SEARCH_BTN = 'search-top-btn';
 // const SEARCH_INPUT = 'search-input';
@@ -265,30 +265,30 @@ describe('Teste de cobertura geral', () => {
     userEvent.click(btnFavorite2);
     userEvent.click(btnFavorite2);
 
-    async function voltaMenu() {
-      const btnStartRecipie = await screen.findByTestId('start-recipe-btn');
-      userEvent.click(btnStartRecipie);
+    // async function voltaMenu() {
+    //   const btnStartRecipie = await screen.findByTestId('start-recipe-btn');
+    //   userEvent.click(btnStartRecipie);
 
-      const btnFavorite = await screen.findByTestId(FAVORITE_BNT);
-      userEvent.click(btnFavorite);
-      userEvent.click(btnFavorite);
-      userEvent.click(btnFavorite);
+    //   const btnFavorite = await screen.findByTestId(FAVORITE_BNT);
+    //   userEvent.click(btnFavorite);
+    //   userEvent.click(btnFavorite);
+    //   userEvent.click(btnFavorite);
 
-      const checkbox = screen.getAllByLabelText(/Check Ingredients/i);
-      console.log(checkbox);
-      checkbox.map((e) => (
-        userEvent.click(e)
-      ));
+    //   const checkbox = screen.getAllByLabelText(/Check Ingredients/i);
+    //   console.log(checkbox);
+    //   checkbox.map((e) => (
+    //     userEvent.click(e)
+    //   ));
 
-      const getFavorite = screen.getByTestId('share-btn');
-      userEvent.click(getFavorite);
+    //   const getFavorite = screen.getByTestId('share-btn');
+    //   userEvent.click(getFavorite);
 
-      const btnFinish = screen.getByTestId('finish-recipe-btn');
-      userEvent.click(btnFinish);
+    //   const btnFinish = screen.getByTestId('finish-recipe-btn');
+    //   userEvent.click(btnFinish);
 
-      const btnProfile = await screen.findByTestId(PROFILE_BTN);
-      userEvent.click(btnProfile);
-    }
+    //   const btnProfile = await screen.findByTestId(PROFILE_BTN);
+    //   userEvent.click(btnProfile);
+    // }
 
     // voltaMenu();
 

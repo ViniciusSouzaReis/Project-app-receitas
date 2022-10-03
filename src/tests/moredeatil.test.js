@@ -86,7 +86,7 @@ const mockRecipieDetail = {
     strCategory: 'Side',
     strArea: 'Turkish',
     strInstructions: 'Pick through your lentil…ridge for about a week.',
-    strMealThumb:	'https://www.themealdb.co…als/58oia61564916529.jpg',
+    strMealThumb: 'https://www.themealdb.co…als/58oia61564916529.jpg',
     strTags: 'Soup',
     strYoutube: 'https://www.youtube.com/watch?v=VVnZd8A84z4',
     strIngredient1: 'Lentils',
